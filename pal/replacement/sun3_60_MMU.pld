@@ -201,7 +201,7 @@ PIN 75 = FC1;
 /* FC2 */
 PIN 76 = !R_ACK;
 PIN 79 = AS;
-/* PIN 80 = TEST1; */
+/* PIN 80 = !TEST1; */
 PIN 81 = !EN_BOOT;
 /* output */
 PIN 83 = !EN_UART;
@@ -210,8 +210,8 @@ PIN 92 = !OUT_EN_CTL;
 PIN 93 = !OUT_EN_DEV;
 PIN 94 = !OE_BOOT;
 
+/* PIN 96 = !EN_PMAP1 */;
 /*
-PIN 96 = ;
 PIN 97 = ;
 PIN 98 = ;
 PIN 99 = ;
@@ -270,7 +270,9 @@ PIN 73  = TDO ;
 	     read as zero, see the NetBSD kernel code
 <https://github.com/NetBSD/src/blob/8e6d7defa0dca699514fe6e292d5c2918d8a4b54/sys/arch/sun3/sun3/pmap.c#L151-L155>
              I suspect it means we could add back the three bits fairly easily if we wanted an improved 3/60
-	     with more usable memory (the schematics for the 3/160 has the extra three bits visible)
+	     with more usable memory (the schematics for the 3/160 has the extra three bits visible).
+	     PMAP1 would be used to control that extra byte.
+	   TYPE[01] is a two-bit field, see below in 1567-1 for meaning.
 
    1574-01 generates some of the status bits? And handles permissions
 */
@@ -301,6 +303,10 @@ WE_PMAP3 = ( A1 &  A0 &  A28 & !A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_
 EN_PMAP3 = ( A1 &  A0 &  A28 & !A29 & !A30 & EN_CTL                & C_S5);
 WE_PMAP2 = ( A1 & !A0 &  A28 & !A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);
 EN_PMAP2 = ( A1 & !A0 &  A28 & !A29 & !A30 & EN_CTL                & C_S5);
+/*
+WE_PMAP1 = (!A1 &  A0 &  A28 & !A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);
+EN_PMAP1 = (!A1 &  A0 &  A28 & !A29 & !A30 & EN_CTL                & C_S5);
+*/
 WE_PMAP0 = (!A1 & !A0 &  A28 & !A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);
 EN_PMAP0 = (!A1 & !A0 &  A28 & !A29 & !A30 & EN_CTL                & C_S5);
 
@@ -346,7 +352,7 @@ EN_DEV   enabled as long as R_ACK is inactive, for conditions:
 	 0xF is a 256 MiB range, where framebuffer memory lives (for Type 0 devices)
 	 Type 1 device ssems to all lives in the lower part of their space.
 	 Type 2/3 (VME) aren't supported on the 3/60.
-	 Type 0/1/2/3 is determined by the MMU mapping, via 2 bits in the PAGE MAP
+	 Type 0/1/2/3 is determined by the MMU mapping, via 2 bits in the PAGE MAP (TYPE[01])
 */
 
 OE_BOOT	   = (                             !FC0 &  FC1 &  FC2 &  EN_BOOT           & AS);
@@ -361,10 +367,11 @@ DIS_RAS	   = (                              FC0 &  FC1 &  FC2);
 EN_UART	   = (  A29 &  A28 &  A30 &  A31 &  FC0 &  FC1 & !FC2                      & AS);
 
 /* not needed, might mess with negative-logic... */
+/* TEST1- is pulled down by S116, so always active */
 /*
-OE_BOOT.oe =    !TEST1;
-OUT_EN_DEV.oe = !TEST1;
-OUT_EN_CTL.oe = !TEST1;
-DIS_RAS.oe =    !TEST1;
-EN_UART.oe =    !TEST1;
+OE_BOOT.oe =    TEST1;
+OUT_EN_DEV.oe = TEST1;
+OUT_EN_CTL.oe = TEST1;
+DIS_RAS.oe =    TEST1;
+EN_UART.oe =    TEST1;
 */
