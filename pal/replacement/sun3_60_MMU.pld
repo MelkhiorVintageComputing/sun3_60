@@ -210,7 +210,7 @@ PIN 92 = !OUT_EN_CTL;
 PIN 93 = !OUT_EN_DEV;
 PIN 94 = !OE_BOOT;
 
-/* PIN 96 = !EN_PMAP1 */;
+/* PIN 96 = !EN_PMAP1 */
 /*
 PIN 97 = ;
 PIN 98 = ;
