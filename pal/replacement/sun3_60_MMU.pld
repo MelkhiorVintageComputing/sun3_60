@@ -263,8 +263,10 @@ PIN 73  = TDO ;
    	   PMAP0 controls the 8-bits of status (MMU.{X,S,W,V}, MODIFY, ACCESS, TYPE0, TYPE1)
 	   PMAP2 controls the 8-bits of address from PA21 to PA28
 	   PMAP3 controls the 8-bits of address from PA13 to PA20
-	   From the usage of A[0..1], it seems those must always use byte load/store, and only the high-order
-	    8 bites (via PMAP0) and low-order 16bits (via PMAP2 and PMAP3) are used. Which means the 3/60 only
+	   The use of A0/A1 is to force the bus to be byte-sized, using the MC68020's bus sizing ability (MC68020UM section 5.2.1).
+	   On a long write, this only acknowledge through DSACK0, indicating a byte ACK (ibid, table 5-1).
+	   So the MC68020 will do the other bytes of the word one by one, incrementing addresses.
+	    Only the high-order 8 bites (via PMAP0) and low-order 16bits (via PMAP2 and PMAP3) are used. Which means the 3/60 only
 	    use 11bits of physical page number (S3AMv2 section 4.6.8), or that it doesn't fully comply with
 	    this document? (using 16 bits with an extra 3 being implicitly 0 maybe?) => it's 16 bits plus 3
 	     read as zero, see the NetBSD kernel code
