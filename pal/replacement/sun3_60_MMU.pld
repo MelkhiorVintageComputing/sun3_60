@@ -320,7 +320,7 @@ RD_BERR	 = (!A1 & !A0 & !A28 &  A29 &  A30 & EN_CTL & !WRITE & C_S3);
 WR_DIAG	 = (!A1 & !A0 &  A28 &  A29 &  A30 & EN_CTL &  WRITE & C_S3        & !C_S7X);
 
 DSACK0n = 'b'0;
-DSACK0_oe =(EN_CTL & C_S5 & C_S7X);
+DSACK0.oe =(EN_CTL & C_S5 & C_S7X);
 
 
 
