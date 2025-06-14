@@ -7298,7 +7298,7 @@
 		)
 		(uuid "cf468791-5ecb-470c-9155-034e1bdbe5e0")
 	)
-	(text "U231 needs a bigger PAL (or two PALs)\n(a) it needs to output EN.SMAP1- & WE.SMAP1-\n\nWE_SMAP	 = (            !A28 &  A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);\nEN_SMAP	 = (            !A28 &  A29 & !A30 & EN_CTL                & C_S5);\n(which ignore alignement) should become\n\n/* byte or upper byte of word */\nWE_SMAP	 = (!A1 & !A0 & !A28 &  A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);\nEN_SMAP	 = (!A1 & !A0 & !A28 &  A29 & !A30 & EN_CTL                & C_S5);\n/* lower byte of word */\nWE_SMAP1 = (!A1 &  A0 & !A28 &  A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);\nEN_SMAP1 = (!A1 &  A0 & !A28 &  A29 & !A30 & EN_CTL                & C_S5);\n\n=> this permit to use the extended S[25..31] bits to address more PMAP\n\n(b) it needs access to A31 to alias the SMAP from 0x2 in Control Space to 0x9, oxC and OxD:\n\n/* byte or upper byte of word */\nwe_smap_0x2	 = (!A1 & !A0 & !A28 &  A29 & !A30 & !A31 & EN_CTL & WRITE & C_S3         & !C_S7X);\nwe_smap_0x9	 = (!A1 & !A0 &  A28 & !A29 & !A30 &  A31 & EN_CTL & WRITE & C_S3         & !C_S7X);\nwe_smap_0xc	 = (!A1 & !A0 & !A28 & !A29 &  A30 &  A31 & EN_CTL & WRITE & C_S3         & !C_S7X);\nwe_smap_0xd	 = (!A1 & !A0 &  A28 & !A29 &  A30 &  A31 & EN_CTL & WRITE & C_S3         & !C_S7X);\nWE_SMAP  = we_smap_0x2 | we_smap_0x9 | we_smap_0xc | we_smap_0xd\n\n/* same changes for EN_SMAP, WE_SMAP1, EN_SMAP1 */\n\n=> this also permit to use another 768 MiB of virtual space"
+	(text "U231 needs a bigger PAL (or two PALs)\n(a) it needs to output EN.SMAP1- & WE.SMAP1-\n\nWE_SMAP	 = (            !A28 &  A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);\nEN_SMAP	 = (            !A28 &  A29 & !A30 & EN_CTL                & C_S5);\n(which ignore alignement) should become\n\n/* byte or upper byte of word */\nWE_SMAP	 = (!A1 & !A0 & !A28 &  A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);\nEN_SMAP	 = (!A1 & !A0 & !A28 &  A29 & !A30 & EN_CTL                & C_S5);\n/* lower byte of word */\nWE_SMAP1 = (!A1 &  A0 & !A28 &  A29 & !A30 & EN_CTL & WRITE & C_S3         & !C_S7X);\nEN_SMAP1 = (!A1 &  A0 & !A28 &  A29 & !A30 & EN_CTL                & C_S5);\n\n=> this permit to use the extended S[25..31] bits to address more PMAP\n\n(b) it needs access to A31 to alias the SMAP from 0x2 in Control Space to 0x9, oxC and OxD:\n\n/* byte or upper byte of word */\nwe_smap_0x2	 = (!A1 & !A0 & !A28 &  A29 & !A30 & !A31 & EN_CTL & WRITE & C_S3         & !C_S7X);\nwe_smap_0x9	 = (!A1 & !A0 &  A28 & !A29 & !A30 &  A31 & EN_CTL & WRITE & C_S3         & !C_S7X);\nwe_smap_0xc	 = (!A1 & !A0 & !A28 & !A29 &  A30 &  A31 & EN_CTL & WRITE & C_S3         & !C_S7X);\nwe_smap_0xd	 = (!A1 & !A0 &  A28 & !A29 &  A30 &  A31 & EN_CTL & WRITE & C_S3         & !C_S7X);\nWE_SMAP  = we_smap_0x2 | we_smap_0x9 | we_smap_0xc | we_smap_0xd\n\n/* same changes for EN_SMAP, WE_SMAP1, EN_SMAP1 */\n\n=> this also permit to use another 768 MiB of virtual space\n\n(c) it would make sense to also generate EN.PMAP1 and WE.PMAP1 (similar to the other three but with !A1 &  A0) to support the third bytes of PMAP and the missing PA (PA29 to PA31 architecturally, up to PA36 practically)"
 		(exclude_from_sim no)
 		(at -83.058 153.924 0)
 		(effects
@@ -18211,6 +18211,16 @@
 			(justify right bottom)
 		)
 		(uuid "5b73c42c-060a-4b01-a3be-92b41e23092d")
+	)
+	(label "GND"
+		(at 114.3 -17.78 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5c509912-5070-4738-a18a-6b1c9214bec1")
 	)
 	(label "RD.SYSEN-"
 		(at 217.17 237.49 180)
