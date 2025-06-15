@@ -385,6 +385,12 @@ DSACK1n	=   !(CAS & CE & C_S3);
 DSACK0n.oe = (CAS & CE & C_S3);
 DSACK1n.oe = (CAS & CE & C_S3);
 
+/* that could seem redundant, but isn't.
+   DXACK is always friven (no .oe!)
+   If (CAS & CE & C_S3) is active, then all three signals (DSACK[0..1] and DXACK are activated and DSACK[01] are driven.
+   If (CAS & CE & C_S3) is not active, then DSACK[0..1] are *inputs* and DXACK tracks them (when something other than memory is acknowledging the transaction)
+*/
+
 DXACK	= (!DSACK0n #
            !DSACK1n #
 	   (CAS & CE & C_S3));
