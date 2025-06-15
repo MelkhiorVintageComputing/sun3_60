@@ -1,0 +1,483 @@
+Name        sun3_60_IOBUS ;
+PartNo      00 ;
+Date        2025-06-xx ;
+Revision    01 ;
+Designer    RomainDolbeau ;
+Company     none ;
+Assembly    Sun 3/60 ;
+Location    Uxxx ;
+Device      F1504ISPTQFP100;
+
+/* 
+   This combines
+   	U122, U123 (register data <-> iobus)
+	U227 (register iobus -> led)
+	U304, U305 (register interrupts <-> iobus)
+*/
+
+/* Enable JTAG interface with internal 10K pullups on TDI and TMS */
+PROPERTY ATMEL { JTAG = ON } ;
+PROPERTY ATMEL { TDI_PULLUP = ON } ;
+PROPERTY ATMEL { TMS_PULLUP = ON } ;
+
+/* Consider pin assignments to be immutable; don't try to rearrange the design
+if it does not fit with the given pin assignments */
+/*
+PROPERTY ATMEL { PREASSIGN = KEEP } ;
+*/
+
+/*
+Pin#     Function
+     1     NC
+     2     NC
+     3     VCC
+     4     IO/TDI
+     5     NC
+     6     IO
+     7     NC
+     8     IO
+     9     IO
+    10     IO
+    11     GND
+    12     IO/PD
+    13     IO
+    14     IO
+    15     IO/TMS
+    16     IO
+    17     IO
+    18     VCC
+    19     IO
+    20     IO
+    21     IO
+    22     NC
+    23     IO
+    24     NC
+    25     IO
+    26     GND
+    27     NC
+    28     NC
+    29     IO
+    30     IO
+    31     IO
+    32     IO
+    33     IO
+    34     VCC
+    35     IO
+    36     IO
+    37     IO
+    38     GND
+    39     VCC
+    40     IO
+    41     IO
+    42     IO/PD
+    43     GND
+    44     IO
+    45     IO
+    46     IO
+    47     IO
+    48     IO
+    49     NC
+    50     NC
+    51     VCC
+    52     IO
+    53     NC
+    54     IO
+    55     NC
+    56     IO
+    57     IO
+    58     IO
+    59     GND
+    60     IO
+    61     IO
+    62     IO/TCK
+    63     IO
+    64     IO
+    65     IO
+    66     VCC
+    67     IO
+    68     IO
+    69     IO
+    70     NC
+    71     IO
+    72     NC
+    73     IO/TDO
+    74     GND
+    75     IO
+    76     IO
+    77     NC
+    78     NC
+    79     IO
+    80     IO
+    81     IO
+    82     VCC
+    83     IO
+    84     IO
+    85     IO/CLK
+    86     GND
+    87     IN/CLK
+    88     IN/OE
+    89     IN/CLR
+    90     IN/CLK/OE
+    91     VCC
+    92     IO
+    93     IO
+    94     IO
+    95     GND
+    96     IO
+    97     IO
+    98     IO
+    99     IO
+   100     IO
+*/
+
+/* INOUTS */
+/* U122, U123, U227 */
+PIN 6 = D24;
+PIN 8 = D25;
+PIN 9 = D26;
+PIN 10 = D27;
+PIN 13 = D28;
+PIN 14 = D29;
+PIN 16 = D30;
+PIN 17 = D31;
+PIN 19 = IO_D0;
+PIN 20 = IO_D1;
+PIN 21 = IO_D2;
+PIN 23 = IO_D3;
+PIN 25 = IO_D4;
+PIN 29 = IO_D5;
+PIN 30 = IO_D6;
+PIN 31 = IO_D7;
+/* INPUTS */
+/* U122, U123 */
+PIN 32 = DS;
+PIN 33 = !WRITE;
+PIN 35 = !DSACK0;
+PIN 36 = !IO2CPU;
+/* U227 */
+PIN 37 = !WR_DIAG;
+PIN 40 = !INIT;
+/* OUTPUTS */
+/* U227 */
+PIN 41 = LED0;
+PIN 44 = LED1;
+PIN 45 = LED2;
+PIN 46 = LED3;
+PIN 47 = LED4;
+PIN 48 = LED5;
+PIN 52 = LED6;
+PIN 54 = LED7;
+/* INOUTS */
+/* U304, U305 */
+/* those signals are no longer used outside of this CPLD */
+/*
+PIN 56 = EN_INT;
+PIN 57 = EN_IRQ1;
+PIN 58 = EN_IRQ2;
+PIN 60 = EN_IRQ3;
+PIN 61 = EN_IRQ4;
+PIN 63 = EN_IRQ5;
+PIN 64 = EN_IRQ6;
+PIN 65 = EN_IRQ7;
+*/
+/* INPUTS */
+/* U304, U305 */
+PIN 67 = !RESET;
+PIN 68 = !WR_INT;
+PIN 69 = !RD_INT;
+/* INPUTS */
+PIN 71 = !V_INT;
+PIN 75 = !SCC_IRQ;
+PIN 76 = !E_IRQ;
+PIN 79 = !PAR_IRQ;
+PIN 80 = !S_IRQ;
+PIN 81 = !RTC;
+/* OUTPUTS */
+PIN 83 = !IPL0;
+PIN 84 = !IPL1;
+PIN 92 = !IPL2;
+
+/* unconnected pins but needed for the hold syntax from U307 */
+PIN 93 = f16;
+PIN 94 = f17;
+PIN 96 = f18;
+PIN 97 = f19;
+PIN 98 = f20;
+/*
+PIN 99 = ;
+PIN 100 = ;
+*/
+
+/* Note that XXX and YYY are active-low signals but we do NOT declare them
+inverted here, as the ATF1502 fitter seems to ignore output enables on pins that
+are declared inverted */
+
+/* Signals that are IN from one PAL and OUT from another have been kept separate, so will need a loopback on the PCB.
+   In theory this is not needed (you can reuse the output signal directly as an internal input), but using a bypass would probably change the timings more than just moving from GAL to CPLD... */
+
+/*
+RESERVED
+PIN 4   = TDI ;
+PIN 15  = TMS ;
+PIN 62  = TCK ;
+PIN 73  = TDO ;
+*/
+
+NODE [dreg7..0];
+NODE [ioddatareg7..0];
+NODE [iodintreg7..0];
+NODE [ledreg7..0];
+NODE [intreg7..0];
+
+/* U123 - dreg */
+D24 = dreg0;
+D25 = dreg1;
+D26 = dreg2;
+D27 = dreg3;
+D28 = dreg4;
+D29 = dreg5;
+D30 = dreg5;
+D31 = dreg6;
+D24.oe = IO2CPU;
+D25.oe = IO2CPU;
+D26.oe = IO2CPU;
+D27.oe = IO2CPU;
+D28.oe = IO2CPU;
+D29.oe = IO2CPU;
+D30.oe = IO2CPU;
+D31.oe = IO2CPU;
+dreg0.d = IO_D0;
+dreg1.d = IO_D1;
+dreg2.d = IO_D2;
+dreg3.d = IO_D3;
+dreg4.d = IO_D4;
+dreg5.d = IO_D5;
+dreg6.d = IO_D6;
+dreg7.d = IO_D7;
+dreg0.ck = !DSACK0;
+dreg1.ck = !DSACK0;
+dreg2.ck = !DSACK0;
+dreg3.ck = !DSACK0;
+dreg4.ck = !DSACK0;
+dreg5.ck = !DSACK0;
+dreg6.ck = !DSACK0;
+dreg7.ck = !DSACK0;
+
+/* U122 - iodatareg (input) */
+ioddatareg0.d = D24;
+ioddatareg1.d = D25;
+ioddatareg2.d = D26;
+ioddatareg3.d = D27;
+ioddatareg4.d = D28;
+ioddatareg5.d = D29;
+ioddatareg6.d = D30;
+ioddatareg7.d = D31;
+ioddatareg0.ck = DS;
+ioddatareg1.ck = DS;
+ioddatareg2.ck = DS;
+ioddatareg3.ck = DS;
+ioddatareg4.ck = DS;
+ioddatareg5.ck = DS;
+ioddatareg6.ck = DS;
+ioddatareg7.ck = DS;
+
+/* U304 - intreg */
+EN_INT  = intreg0;
+EN_IRQ1 = intreg1;
+EN_IRQ2 = intreg2;
+EN_IRQ3 = intreg3;
+EN_IRQ4 = intreg4;
+EN_IRQ5 = intreg5;
+EN_IRQ6 = intreg6;
+EN_IRQ7 = intreg7;
+intreg0.d = IO_D0;
+intreg1.d = IO_D1;
+intreg2.d = IO_D2;
+intreg3.d = IO_D3;
+intreg4.d = IO_D4;
+intreg5.d = IO_D5;
+intreg6.d = IO_D6;
+intreg7.d = IO_D7;
+intreg0.ck = !WR_INT;
+intreg1.ck = !WR_INT;
+intreg2.ck = !WR_INT;
+intreg3.ck = !WR_INT;
+intreg4.ck = !WR_INT;
+intreg5.ck = !WR_INT;
+intreg6.ck = !WR_INT;
+intreg7.ck = !WR_INT;
+intreg0.ar = RESET;
+intreg1.ar = RESET;
+intreg2.ar = RESET;
+intreg3.ar = RESET;
+intreg4.ar = RESET;
+intreg5.ar = RESET;
+intreg6.ar = RESET;
+intreg7.ar = RESET;
+
+/* U305 - iodintreg (input) */
+iodintreg0.d = IO_D0;
+iodintreg1.d = IO_D1;
+iodintreg2.d = IO_D2;
+iodintreg3.d = IO_D3;
+iodintreg4.d = IO_D4;
+iodintreg5.d = IO_D5;
+iodintreg6.d = IO_D6;
+iodintreg7.d = IO_D7;
+iodintreg0.ck = RD_INT;
+iodintreg1.ck = RD_INT;
+iodintreg2.ck = RD_INT;
+iodintreg3.ck = RD_INT;
+iodintreg4.ck = RD_INT;
+iodintreg5.ck = RD_INT;
+iodintreg6.ck = RD_INT;
+iodintreg7.ck = RD_INT;
+
+/* output combined from U122 and U305 */
+/* write on IOBUS from either register */
+IO_D0 = (ioddatareg0 & WRITE) # (iodintreg0 & RD_INT);
+IO_D1 = (ioddatareg1 & WRITE) # (iodintreg1 & RD_INT);
+IO_D2 = (ioddatareg2 & WRITE) # (iodintreg2 & RD_INT);
+IO_D3 = (ioddatareg3 & WRITE) # (iodintreg3 & RD_INT);
+IO_D4 = (ioddatareg4 & WRITE) # (iodintreg4 & RD_INT);
+IO_D5 = (ioddatareg5 & WRITE) # (iodintreg5 & RD_INT);
+IO_D6 = (ioddatareg6 & WRITE) # (iodintreg6 & RD_INT);
+IO_D7 = (ioddatareg7 & WRITE) # (iodintreg7 & RD_INT);
+IO_DO.oe = WRITE & RD_INT;
+IO_D1.oe = WRITE & RD_INT;
+IO_D2.oe = WRITE & RD_INT;
+IO_D3.oe = WRITE & RD_INT;
+IO_D4.oe = WRITE & RD_INT;
+IO_D5.oe = WRITE & RD_INT;
+IO_D6.oe = WRITE & RD_INT;
+IO_D7.oe = WRITE & RD_INT;
+
+
+/* U227 - diagreg (for LEDs) */
+LED0 = ledreg0;
+LED1 = ledreg1;
+LED2 = ledreg2;
+LED3 = ledreg3;
+LED4 = ledreg4;
+LED5 = ledreg5;
+LED6 = ledreg6;
+LED7 = ledreg7;
+ledreg0.d = IO_D0;
+ledreg1.d = IO_D1;
+ledreg2.d = IO_D2;
+ledreg3.d = IO_D3;
+ledreg4.d = IO_D4;
+ledreg5.d = IO_D5;
+ledreg6.d = IO_D6;
+ledreg7.d = IO_D7;
+ledreg0.ck = !WR_DIAG;
+ledreg1.ck = !WR_DIAG;
+ledreg2.ck = !WR_DIAG;
+ledreg3.ck = !WR_DIAG;
+ledreg4.ck = !WR_DIAG;
+ledreg5.ck = !WR_DIAG;
+ledreg6.ck = !WR_DIAG;
+ledreg7.ck = !WR_DIAG;
+ledreg0.ar = INIT;
+ledreg1.ar = INIT;
+ledreg2.ar = INIT;
+ledreg3.ar = INIT;
+ledreg4.ar = INIT;
+ledreg5.ar = INIT;
+ledreg6.ar = INIT;
+ledreg7.ar = INIT;
+
+/*
+ Interrupts.
+ The CPU takes interrupt level 0-7 (0 is no interrupt) from IPL[0..2] in negative logic.
+ The inputs from the interrupt [enable] register are:
+ EN_INT	    	 enable all interrupts (off == no interrupt)
+ EN_IRQ1	 SW interrupt lvl 1 (SW cleared)
+ EN_IRQ2	 SW interrupt lvl 2 (SW cleared)
+ EN_IRQ3	 SW interrupt lvl 3 (SW cleared)
+ EN_IRQ4	 Enable Video Interrupt (clear by temporary turn off this bit)
+ EN_IRQ5	 Enable Clock Interrupt Lvl5 (clear by temporary turn off this bit)
+ EN_IRQ6	 (rsvd)
+ EN_IRQ7	 Enable Clock Interrupt Lvl7 (clear by temporary turn off this bit)
+ Device interrupts priority:
+ Lvl	    	Device
+ 1		SW Lvl1
+ 2		SCSI, SW Lvl2
+ 3		Ethernet (both), SW Lvl3
+ 4		Video
+ 5		clock [set on rising edge despite the negative polarity in the name]
+ 6		SCC (both)
+ 7		Memory error, clock
+
+f16 to f20 retain the name (and negative polarity) from the original PAL.
+
+* those two are control signals, no direct use for IPL[0..2]
+!f16: set (EN_IRQ7 & !RTC) and hold (EN_IRQ7 & !f16) when EN_IRQ7 is set but there is no clock interrupt; disabled by turning off EN_IRQ7
+!f17: idem f16 but for EN_IRQ5; disabled by turning off EN_IRQ5
+
+* those three are actual interrupts    
+!f20: set (EN_IRQ4 & V_INT) and hold (EN_IRQ4 & f20) video interrupt at 4 (IPL2, !IPL1, !IPL0); disabled by turning off EN_IRQ4
+!f18: set (!f17 & EN_IRQ5 & RTC) and hold (!f18 & EN_IRQ5) the level 5 clock interrupt if there is currently none active (!f17)
+!f19: idem !f18 but at Lvl 7 (!f16), also activated on parity error
+
+*/
+
+/* ***** WARNING ***** */
+/* The 'hold' syntax from the PAL code isn't valid PLD! */
+/* Intermediate can't depend on itself! */
+/* f16-f20 must have pins for this to compile with WinCUPL */
+/* ***** WARNING ***** */
+
+f20	= !((EN_IRQ4 & V_INT) #
+            (EN_IRQ4 & !f20));
+f19	= !((!f16 & EN_IRQ7 & RTC) #
+ 	    (!f19 & EN_IRQ7) #
+	     PAR_IRQ);
+f18	= !((!f17 & EN_IRQ5 & RTC) #
+	    (!f18 & EN_IRQ5));
+f17	= !((EN_IRQ5 & !RTC) #
+            (EN_IRQ5 & !f17));
+f16	= !((EN_IRQ7 & !RTC) #
+            (EN_IRQ7 & !f16));
+
+/*
+  Set the CPU interrupt lines.
+  EN_INT disabled cut off all interrupts here.
+  !f19                 the Lvl7 interrupt (from clock or parity error)
+                       has maximum priority and set all three lines (== 7).
+                       All other lower IRQs check for f19 (== disabled)
+  SCC_IRQ (positive)   Second highest priority; generate IPL2 and IPL1 (== 6)
+                       All other lower IRQs check for !SCC_IRQ
+  !f18		       the Lvl5 interrupt (from clock)
+  		       set IPL2 and IPL0 (== 5)
+                       All other lower IRQs check for f18 (== disabled)
+  !f20                 Video interrupt, generate IPL2 only (== 4)
+                       All other lower IRQs check for f20 (== disabled)
+  EN_IRQ3, E_IRQ       SW Lvl 3 and Ethernet, same priority
+                       (they don't check for each other)
+		       Set IPL1 and IPL0 (== 3)
+		       All other lower IRQs check for !EN_IRQ3 & !E_IRQ
+  EN_IRQ2, S_IRQ       SW Lvl 2 and SCSI, same priority
+                       (they don't check for each other)
+		       Set IPL1  (== 2)
+		       The lower IRQs check for !EN_IRQ2 & !S_IRQ
+  EN_IRQ1              SW Lvl 1. Set IPL0 (== 1)
+  		       Only activate when no-one else interrupts
+                       
+*/
+
+IPL0	= ((       !f19                 & EN_INT) #
+	   (!f18 &  f19                 & EN_INT                                          & !SCC_IRQ) #
+	   ( f18 &  f19 &  f20          & EN_INT & EN_IRQ3                                & !SCC_IRQ) #
+	   ( f18 &  f19 &  f20 &  E_IRQ & EN_INT                                          & !SCC_IRQ) #
+	   ( f18 &  f19 &  f20 & !E_IRQ & EN_INT & EN_IRQ1 & !EN_IRQ2 & !EN_IRQ3 & !S_IRQ & !SCC_IRQ));
+IPL1	= ((       !f19                 & EN_INT) #
+           (        f19                 & EN_INT                                          &  SCC_IRQ) #
+	   ( f18 &  f19 &  f20          & EN_INT                       & EN_IRQ3          & !SCC_IRQ) #
+	   ( f18 &  f19 &  f20 &  E_IRQ & EN_INT                                          & !SCC_IRQ) #
+	   ( f18 &  f19 &  f20 & !E_IRQ & EN_INT            & EN_IRQ2 & !EN_IRQ3          & !SCC_IRQ) #
+	   ( f18 &  f19 &  f20 & !E_IRQ & EN_INT                      & !EN_IRQ3 & S_IRQ  & !SCC_IRQ));
+IPL2	= ((       !f19                 & EN_INT) #
+           (        f19                 & EN_INT                                          &  SCC_IRQ) #
+	   (!f18 &  f19                 & EN_INT                                          & !SCC_IRQ) #
+	   ( f18 &  f19 & !f20          & EN_INT                                          & !SCC_IRQ));
