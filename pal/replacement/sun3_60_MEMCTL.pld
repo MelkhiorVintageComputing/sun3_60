@@ -260,8 +260,8 @@ RAS = (CLK & !DIS_RAS & AS & !C_S3) #
      Holding term; keeps CAS activated as long as AS is active
    So for normal memory cycle, CAS is activated from S4 to clock cycle high during/after the deactivation of AS,
    so starts 1 cycle @ 20 MHz or about 50ns after RAS.
-   For deactivation, it likely depends on when AS is deactivated. The MC68020 reacts to DSACK[01] being asserted which
-   happens in U805 (1590-01) as soon as CAS, CE and C.S3 are all active. 
+   For deactivation, it likely depends on when AS is deactivated. The MC68020 reacts to DSACK[01] being asserted at the end of S2,
+   then capture the data (for reads) at the end of S4. DSACK activation happens in U805 (1590-01) as soon as CAS, CE and C.S3 are all active.
 */
 
 CAS = (CLK & EN_CAS & C_S3 & !DISACC) #
@@ -271,7 +271,16 @@ CAS = (CLK & EN_CAS & C_S3 & !DISACC) #
 
 /* U801, 74AS257 */
 /* Uses TWOWAY to pick between A2 and PA22,
-   and to generate SEL0/SEL1 (both active when TWOWAY is inactive) */
+   and to generate SEL0/SEL1 (both active when TWOWAY is inactive)
+
+TWOWAY        0        1 //positive logic == !TWOWAY-
+------------------------
+PA02_22	   PA22       A2
+PA22_O2      A2	    PA22
+SEL0          1      !A2 // positive logic == !SEL0-   
+SEL1          1       A2
+
+*/
 PA02_22 = ( TWOWAY &   A2) #
 	  (!TWOWAY & PA22);
 PA22_02 = ( TWOWAY & PA22) #
@@ -386,7 +395,7 @@ DSACK0n.oe = (CAS & CE & C_S3);
 DSACK1n.oe = (CAS & CE & C_S3);
 
 /* that could seem redundant, but isn't.
-   DXACK is always friven (no .oe!)
+   DXACK is always driven (no .oe!)
    If (CAS & CE & C_S3) is active, then all three signals (DSACK[0..1] and DXACK are activated and DSACK[01] are driven.
    If (CAS & CE & C_S3) is not active, then DSACK[0..1] are *inputs* and DXACK tracks them (when something other than memory is acknowledging the transaction)
 */
