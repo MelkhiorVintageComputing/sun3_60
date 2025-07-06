@@ -121,6 +121,10 @@
 		(uuid "0926b269-ca72-4438-be03-b766ac12c3b8")
 	)
 	(no_connect
+		(at 115.57 36.83)
+		(uuid "11515b2e-724e-459b-9e3f-ab6366e21731")
+	)
+	(no_connect
 		(at 109.22 179.07)
 		(uuid "157bb8ee-886b-4975-8d6a-7dc2bff6ae09")
 	)
@@ -159,6 +163,10 @@
 	(no_connect
 		(at 97.79 191.77)
 		(uuid "603a4f40-09d8-4d93-8ca6-30906e31ba0a")
+	)
+	(no_connect
+		(at 116.84 36.83)
+		(uuid "669249de-0e5c-4d05-b3c7-97470d5e7516")
 	)
 	(no_connect
 		(at 109.22 149.86)
@@ -207,6 +215,14 @@
 	(no_connect
 		(at 109.22 181.61)
 		(uuid "c64a97ca-3e0e-4544-abf4-8add654217a4")
+	)
+	(no_connect
+		(at 114.3 36.83)
+		(uuid "cead5ceb-a574-48d5-8c18-d7793351b9a8")
+	)
+	(no_connect
+		(at 118.11 36.83)
+		(uuid "d42f8464-d1a0-46c0-81a2-64f244a837c2")
 	)
 	(no_connect
 		(at 204.47 52.07)
@@ -4585,6 +4601,16 @@
 		(pin "MMU[0..7]" input
 			(at 130.81 49.53 0)
 			(uuid "4708fd2f-a56c-40e8-b2d6-803ef2bda7f1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "PA[29..36]" bidirectional
+			(at 114.3 36.83 90)
+			(uuid "113d6d76-fcfa-4470-bb5c-435030e993d6")
 			(effects
 				(font
 					(size 1.27 1.27)
