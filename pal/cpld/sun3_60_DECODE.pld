@@ -1,0 +1,333 @@
+Name        sun3_60_DECODE ;
+PartNo      00 ;
+Date        2025-07-xx ;
+Revision    01 ;
+Designer    RomainDolbeau ;
+Company     none ;
+Assembly    Sun 3/60 ;
+Location    Uxxx ;
+Device      F1504ISPTQFP100;
+
+/* 
+   This combines ...
+   U310, U311, U312
+   U114
+*/
+
+/* Enable JTAG interface with internal 10K pullups on TDI and TMS */
+PROPERTY ATMEL { JTAG = ON } ;
+PROPERTY ATMEL { TDI_PULLUP = ON } ;
+PROPERTY ATMEL { TMS_PULLUP = ON } ;
+
+/* Consider pin assignments to be immutable; don't try to rearrange the design
+if it does not fit with the given pin assignments */
+/*
+PROPERTY ATMEL { PREASSIGN = KEEP } ;
+*/
+
+/*
+Pin#     Function
+     1     NC
+     2     NC
+     3     VCC
+     4     IO/TDI
+     5     NC
+     6     IO
+     7     NC
+     8     IO
+     9     IO
+    10     IO
+    11     GND
+    12     IO/PD
+    13     IO
+    14     IO
+    15     IO/TMS
+    16     IO
+    17     IO
+    18     VCC
+    19     IO
+    20     IO
+    21     IO
+    22     NC
+    23     IO
+    24     NC
+    25     IO
+    26     GND
+    27     NC
+    28     NC
+    29     IO
+    30     IO
+    31     IO
+    32     IO
+    33     IO
+    34     VCC
+    35     IO
+    36     IO
+    37     IO
+    38     GND
+    39     VCC
+    40     IO
+    41     IO
+    42     IO/PD
+    43     GND
+    44     IO
+    45     IO
+    46     IO
+    47     IO
+    48     IO
+    49     NC
+    50     NC
+    51     VCC
+    52     IO
+    53     NC
+    54     IO
+    55     NC
+    56     IO
+    57     IO
+    58     IO
+    59     GND
+    60     IO
+    61     IO
+    62     IO/TCK
+    63     IO
+    64     IO
+    65     IO
+    66     VCC
+    67     IO
+    68     IO
+    69     IO
+    70     NC
+    71     IO
+    72     NC
+    73     IO/TDO
+    74     GND
+    75     IO
+    76     IO
+    77     NC
+    78     NC
+    79     IO
+    80     IO
+    81     IO
+    82     VCC
+    83     IO
+    84     IO
+    85     IO/CLK
+    86     GND
+    87     IN/CLK
+    88     IN/OE
+    89     IN/CLR
+    90     IN/CLK/OE
+    91     VCC
+    92     IO
+    93     IO
+    94     IO
+    95     GND
+    96     IO
+    97     IO
+    98     IO
+    99     IO
+   100     IO
+*/
+
+PIN 6 = ;
+PIN 8 = !RD_SCC1;
+PIN 9 = !WR_SCC1;!WR_PAR4
+PIN 10 = !EN_UART;
+PIN 13 = !WR_PARX;
+PIN 14 = !RD_PARX;
+PIN 16 = !WR_SCC0;
+PIN 17 = !RD_SCC0;
+PIN 19 = !RD_RTC;;
+PIN 20 = !WR_RTC;
+PIN 21 = !RERUN;
+PIN 23 = !C_S21;
+PIN 25 = !INIT;
+PIN 29 = ;
+PIN 30 = !EN_IO;
+PIN 31 = ;
+PIN 32 = ;
+/* !RD_PAR0,  !WR_PAR0, !RD_PAR4, !RD_PAR5, !RD_PAR6, !RD_PAR7, !WR_PAR4 */
+PIN 33 = ;
+PIN 35 = ;
+PIN 36 = ;
+PIN 37 = ;
+PIN 40 = ;
+PIN 41 = ;
+
+PIN 42 = ; /* */
+
+PIN 44 = !OE_EPROM;
+PIN 45 = ;
+PIN 46 = !IOLOCK;
+PIN 47 = !EN_E;
+PIN 48 = !C_S9;
+PIN 52 = C_S5bis;
+PIN 54 = C_S3bis;
+PIN 56 = AS;
+PIN 57 = !EN_S;
+PIN 58 = !EN_V;
+PIN 60 = EN_CAS;
+PIN 61 = ;
+PIN 63 = !DS;
+PIN 64 = PA28;
+/* A2 */
+PIN 65 = ;
+PIN 67 = PA17;
+PIN 68 = PA18;
+PIN 69 = PA19;
+PIN 71 = PA20;
+/* A0, A1 */
+PIN 75 = ;
+PIN 76 = ;
+PIN 79 = !C_S3;
+PIN 80 = !C_S5;
+PIN 81 = C_S7;
+PIN 83 = !OE_BOOT;
+PIN 84 = TYPE1;
+PIN 85 = TYPE0; /* */
+PIN 87 = !DISACC; /* */
+PIN 88 = !WRITE; /* */
+PIN 90 = !CLK;
+PIN 92 = !IO2CPU;
+PIN 93 = !EN_DEV;
+PIN 94 = DSACK0n;
+PIN 96 = ;
+PIN 97 = !RD_EEPROM;
+PIN 98 = !WR_EEPROM;
+PIN 99 = !RD_INT;
+PIN 100 = !WR_INT;
+
+
+/* Note that XXX and YYY are active-low signals but we do NOT declare them
+inverted here, as the ATF1502 fitter seems to ignore output enables on pins that
+are declared inverted */
+
+/*
+RESERVED
+PIN 4   = TDI ;
+PIN 15  = TMS ;
+PIN 62  = TCK ;
+PIN 73  = TDO ;
+*/
+
+/* U310 */
+
+/* EN.IOL becomes internal */
+
+RERUN	= ((       C_S5           & EN_DEV & IOLOCK & PA28 & ~TYPE0 & ~TYPE1) #
+           (C_S3 & C_S5 & !DISACC & EN_DEV & IOLOCK         &  TYPE0 & ~TYPE1));
+RERUN_oe = (C_S5 & IOLOCK)
+
+EN_CAS	= ~(!EN_DEV # PA28 # TYPE0 # TYPE1);
+EN_IOL  =  (!C_S21 & C_S3 & C_S5 & !DISACC      & EN_DEV & !IOLOCK                         & ~PA20        &  TYPE0 & ~TYPE1);
+EN_IO	=  (         C_S3 & C_S5 & !DISACC & DS & EN_DEV & !IOLOCK                                        &  TYPE0 & ~TYPE1);
+EN_V	=  (                                      EN_DEV & !IOLOCK                                 & PA28 & ~TYPE0 & ~TYPE1);
+EN_E	=  (         C_S3 & C_S5 & !DISACC & DS & EN_DEV & !IOLOCK &  PA17 & ~PA18 & ~PA19 &  PA20 &         TYPE0 & ~TYPE1);
+EN_S	=  (         C_S3 & C_S5 & !DISACC & DS & EN_DEV & !IOLOCK & ~PA17 &  PA18 & ~PA19 &  PA20 &         TYPE0 & ~TYPE1);
+/*
+EN_CAS_oe = TEST4;
+EN_IOL.oe = TEST4;
+EN_IO.oe  = TEST4;
+EN_V.oe   = TEST4;
+EN_E.oe   = TEST4;
+EN_E.oe   = TEST4;
+*/
+
+/* U310 */
+
+OE_EPROM = ((C_S5 & OE_BOOT & !WRITE) #
+            (C_S5 & EN_IO & ~PA17 & ~PA18 & ~PA19 &  PA20 & !WRITE));
+						  
+IO2CPU	 = ((C_S5 & EN_UART                               & !WRITE) #
+            (C_S5 & OE_BOOT                               & !WRITE) #
+            (C_S5 & EN_IO                         & ~PA20 & !WRITE) #
+            (C_S5 & EN_IO & ~PA17 & ~PA18 & ~PA19 &  PA20 & !WRITE) #
+            (C_S5 & EN_IO & ~PA17 &  PA18 &  PA19 &  PA20 & !WRITE));
+	    
+DSACK0n	=  ~((           C_S21                                          & EN_UART) #
+             (C_S9                                                      & OE_BOOT) #
+             (           C_S21 & EN_IO                 & ~PA19 & ~PA20) #
+             (           C_S21 & EN_IO         & ~PA18 &  PA19 & ~PA20) #
+             (C_S9             & EN_IO & ~PA17 & ~PA18 & ~PA19 &  PA20));
+DSACK0n.oe = !f19;
+
+f19	=  ~((           C_S21                                          & EN_UART) #
+             (C_S9                                                      & OE_BOOT) #
+             (           C_S21 & EN_IO                 & ~PA19 & ~PA20) #
+             (           C_S21 & EN_IO         & ~PA18 &  PA19 & ~PA20) #
+             (C_S9             & EN_IO & ~PA17 & ~PA18 & ~PA19 &  PA20));
+
+
+RD_SCC0	= (INIT # (!C_S21 & C_S5 & EN_IO & ~PA17 & ~PA18 & ~PA19 & ~PA20           & !WRITE));
+WR_SCC0	= (INIT # (!C_S21 & C_S5 & EN_IO & ~PA17 & ~PA18 & ~PA19 & ~PA20           &  WRITE));
+RD_SCC1	= (INIT # (!C_S21 & C_S5                                         & EN_UART & !WRITE) #
+                  (!C_S21 & C_S5 & EN_IO &  PA17 & ~PA18 & ~PA19 & ~PA20           & !WRITE));
+WR_SCC1	= (INIT # (!C_S21 & C_S5                                         & EN_UART &  WRITE) #
+                  (!C_S21 & C_S5 & EN_IO &  PA17 & ~PA18 & ~PA19 & ~PA20           &  WRITE));
+/*
+OE_EPROM.oe = TEST4;
+IO2CPU.oe = TEST4;
+RD_SCC0.oe = TEST4;
+WR_SCC0.oe = TEST4;
+RD_SCC1.oe = TEST4;
+WR_SCC1.oe = TEST4;
+*/
+
+/* U312 */
+
+   // EEPROM is supposed to be at 0x00004000
+WR_EEPROM = (( WRITE & ~PA19 &  PA18) & (EN_IOL & ~PA17));
+RD_EEPROM = ((!WRITE & ~PA19 &  PA18) & (EN_IOL & ~PA17));
+
+   /* Interrupt register supposed to be at 0x0000A000 */
+WR_INT    = (( WRITE &  PA19 & ~PA18) & (EN_IOL &  PA17));
+RD_INT    = ((!WRITE &  PA19 & ~PA18) & (EN_IOL &  PA17));
+   
+   /* TOD register supposed to be at 0x00006000 */
+WR_RTC    = (( WRITE & ~PA19 &  PA18) & (EN_IOL &  PA17));
+RD_RTC    = ((!WRITE & ~PA19 &  PA18) & (EN_IOL &  PA17));
+
+   // internal wiring, matches 0x00008000 (memory error register)
+   // negative logic
+internal2 = (( WRITE &  PA19 & ~PA18) & (EN_IOL & ~PA17)); /* write */
+internal3 = ((!WRITE &  PA19 & ~PA18) & (EN_IOL & ~PA17)); /* read */
+
+/* If we compute WR_PAR* and RD_PAR* here, we need to route them
+all the way to the parity stuff.
+   It also requires us to have access to A0/A1/A2 in this CPLD
+   Instead, we can simply expose internal2 and internal3 and
+   compute them nearer the destinatio
+/*
+WR_PAR0   = ((~A2 & ~A1 & ~A0) & (~internal2)); // internal2 active low
+WR_PAR4   = (( A2 & ~A1 & ~A0) & (~internal2)); // internal2 active low
+
+RD_PAR0   = ((~A2 & ~A1 & ~A0) & (~internal3)); // internal3 active low
+RD_PAR4   = (( A2 & ~A1 & ~A0) & (~internal3)); // internal3 active low
+RD_PAR5   = (( A2 & ~A1 &  A0) & (~internal3)); // internal3 active low
+RD_PAR6   = (( A2 &  A1 & ~A0) & (~internal3)); // internal3 active low
+RD_PAR7   = (( A2 &  A1 &  A0) & (~internal3)); // internal3 active low
+*/
+WR_PARX = !internal2;
+RD_PARX = !internal3;
+
+/* U114 */
+
+C_S3.d = 1;
+C_S5.d = C_S3;
+C_S7.d = C_S5;
+C_S9.d = C_S7;
+
+C_S3.ck = !CLK;
+C_S5.ck = !CLK;
+C_S7.ck = !CLK;
+C_S9.ck = !CLK;
+
+C_S3.ar = !AS;
+C_S5.ar = !AS;
+C_S7.ar = !AS;
+C_S9.ar = !AS;
+
+C_S3bis = C_S3; /* bis will be positive logic */
+C_S5bis = C_S5;
+
+

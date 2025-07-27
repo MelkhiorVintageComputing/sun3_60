@@ -1,0 +1,342 @@
+Name        sun3_60_SYSREG ;
+PartNo      00 ;
+Date        2025-06-xx ;
+Revision    01 ;
+Designer    RomainDolbeau ;
+Company     none ;
+Assembly    Sun 3/60 ;
+Location    Uxxx ;
+Device      F1504ISPTQFP100;
+
+/* 
+   This combines the devices implementing the system registers (other than DIAG) and U212
+   U210 (context)
+   U223 (BERR)
+   U225/U226 (SYSEN)
+   and
+   U212 (buffer between the data bus and MMU bus)
+   and
+   U224 (IDPROM)
+
+   DIAG could be implemented, but would use up 17 pins as only INIT- is shared with another devicre, and its only purpose is to drive LEDs. As 74ALS273 are still widely available and cheap, DIAG can remain a discrete component.
+*/
+
+/* Enable JTAG interface with internal 10K pullups on TDI and TMS */
+PROPERTY ATMEL { JTAG = ON } ;
+PROPERTY ATMEL { TDI_PULLUP = ON } ;
+PROPERTY ATMEL { TMS_PULLUP = ON } ;
+
+/* Consider pin assignments to be immutable; don't try to rearrange the design
+if it does not fit with the given pin assignments */
+/*
+PROPERTY ATMEL { PREASSIGN = KEEP } ;
+*/
+
+/*
+Pin#     Function
+     1     NC
+     2     NC
+     3     VCC
+     4     IO/TDI
+     5     NC
+     6     IO
+     7     NC
+     8     IO
+     9     IO
+    10     IO
+    11     GND
+    12     IO/PD
+    13     IO
+    14     IO
+    15     IO/TMS
+    16     IO
+    17     IO
+    18     VCC
+    19     IO
+    20     IO
+    21     IO
+    22     NC
+    23     IO
+    24     NC
+    25     IO
+    26     GND
+    27     NC
+    28     NC
+    29     IO
+    30     IO
+    31     IO
+    32     IO
+    33     IO
+    34     VCC
+    35     IO
+    36     IO
+    37     IO
+    38     GND
+    39     VCC
+    40     IO
+    41     IO
+    42     IO/PD
+    43     GND
+    44     IO
+    45     IO
+    46     IO
+    47     IO
+    48     IO
+    49     NC
+    50     NC
+    51     VCC
+    52     IO
+    53     NC
+    54     IO
+    55     NC
+    56     IO
+    57     IO
+    58     IO
+    59     GND
+    60     IO
+    61     IO
+    62     IO/TCK
+    63     IO
+    64     IO
+    65     IO
+    66     VCC
+    67     IO
+    68     IO
+    69     IO
+    70     NC
+    71     IO
+    72     NC
+    73     IO/TDO
+    74     GND
+    75     IO
+    76     IO
+    77     NC
+    78     NC
+    79     IO
+    80     IO
+    81     IO
+    82     VCC
+    83     IO
+    84     IO
+    85     IO/CLK
+    86     GND
+    87     IN/CLK
+    88     IN/OE
+    89     IN/CLR
+    90     IN/CLK/OE
+    91     VCC
+    92     IO
+    93     IO
+    94     IO
+    95     GND
+    96     IO
+    97     IO
+    98     IO
+    99     IO
+   100     IO
+*/
+
+PIN 6 = ;
+PIN 8 = A4;
+PIN 9 = A3;
+PIN 10 = A2;
+PIN 13 = A1;
+PIN 14 = A0;
+PIN 16 = !INIT;
+PIN 17 = !BERR_T;
+PIN 19 = !RD_ID;
+PIN 20 = !EN_BOOT;
+PIN 21 = D29;
+PIN 23 = D30;
+PIN 25 = D31;
+PIN 29 = D28;
+PIN 30 = D27;
+PIN 31 = D26;
+PIN 32 = D25;
+PIN 33 = D24;
+PIN 35 = !RD_SYSEN;
+PIN 36 = !WR_SYSEN;
+PIN 37 = !DIAG;
+PIN 40 = !RD_CX;
+PIN 41 = ;
+PIN 44 = !WR_CX;
+PIN 45 = !EN_CTL;
+PIN 46 = !BERR_V;
+PIN 47 = !BERR_P;
+PIN 48 = !RD_BERR;
+PIN 52 = MMU7;
+PIN 54 = MMU6;
+PIN 56 = MMU5;
+PIN 57 = MMU4;
+PIN 58 = MMU3;
+PIN 60 = MMU2;
+PIN 61 = MMU1;
+PIN 63 = MMU0;
+PIN 64 = ;
+PIN 65 = ;
+PIN 67 = ;
+PIN 68 = !WDOG;
+PIN 69 = ;
+PIN 71 = ;
+PIN 75 = !READ;
+PIN 76 = CX0;
+PIN 79 = CX1;
+PIN 80 = CX2;
+PIN 81 = CX3;
+PIN 83 = CX5;
+PIN 84 = CX4;
+PIN 87 = ENABLE_S3E; /* INPUT / GCLK1 */
+PIN 90 = BERRCLK; /* INPUT/OE2 /GCLK2 */
+PIN 92 = EN_FPP;
+PIN 93 = EN_VIDEO;
+PIN 94 = ;
+PIN 96 = ;
+PIN 97 = ;
+PIN 98 = ;
+PIN 99 = ;
+PIN 100 = ;
+
+
+/* Note that XXX and YYY are active-low signals but we do NOT declare them
+inverted here, as the ATF1502 fitter seems to ignore output enables on pins that
+are declared inverted */
+
+/* Signals that are IN from one PAL and OUT from another have been kept separate, so will need a loopback on the PCB.
+   In theory this is not needed (you can reuse the output signal directly as an internal input), but using a bypass would probably change the timings more than just moving from GAL to CPLD... */
+
+/*
+RESERVED
+PIN 4   = TDI ;
+PIN 15  = TMS ;
+PIN 62  = TCK ;
+PIN 73  = TDO ;
+*/
+
+/* U210 */
+NODE [cxreg5..0]; /* buried (?) registers */
+NODE [berrreg3..0]; /* don't store the 4 always-1 input */
+NODE [sysenreg7..0];
+
+
+/* U210 */
+/* always-on outputs */
+CX0 = cxreg0;
+CX1 = cxreg1;
+CX2 = cxreg2;
+CX3 = cxreg3 & ENABLE_S3E;
+CX4 = cxreg4 & ENABLE_S3E;
+CX5 = cxreg4 & ENABLE_S3E;
+/* clock for the D-type flip-flop */
+cxreg0.ck = !WR_CX;
+cxreg1.ck = !WR_CX;
+cxreg2.ck = !WR_CX;
+cxreg3.ck = !WR_CX;
+cxreg4.ck = !WR_CX;
+cxreg5.ck = !WR_CX;
+/* input of the D-type flip-flop */
+cxreg0.d = MMU0;
+cxreg1.d = MMU1;
+cxreg2.d = MMU2;
+cxreg3.d = MMU3;
+cxreg4.d = MMU4;
+cxreg5.d = MMU5;
+
+/* U223 */
+berrreg0.ck = BERRCLK;
+berrreg1.ck = BERRCLK;
+berrreg2.ck = BERRCLK;
+berrreg3.ck = BERRCLK;
+/* store the register in positive logic, so don't invert in the output */
+berrreg0.d = WDOG;
+berrreg1.d = BERR_T;
+berrreg2.d = BERR_P;
+berrreg3.d = BERR_V;
+
+/* U225, U226 */
+sysenreg0.ck = !WR_SYSEN;
+sysenreg1.ck = !WR_SYSEN;
+sysenreg2.ck = !WR_SYSEN;
+sysenreg3.ck = !WR_SYSEN;
+sysenreg4.ck = !WR_SYSEN;
+sysenreg5.ck = !WR_SYSEN;
+sysenreg6.ck = !WR_SYSEN;
+sysenreg7.ck = !WR_SYSEN;
+sysenreg0.d = MMU0;
+sysenreg1.d = MMU1;
+sysenreg2.d = MMU2;
+sysenreg3.d = MMU3;
+sysenreg4.d = MMU4;
+sysenreg5.d = MMU5;
+sysenreg6.d = MMU6;
+sysenreg7.d = MMU7;
+sysenreg0.ar = INIT;
+sysenreg1.ar = INIT;
+sysenreg2.ar = INIT;
+sysenreg3.ar = INIT;
+sysenreg4.ar = INIT;
+sysenreg5.ar = INIT;
+sysenreg6.ar = INIT;
+sysenreg7.ar = INIT;
+/* U225 has always-on outputs */
+EN_VIDEO = sysenreg3;
+EN_FPP   = sysenreg6;
+EN_BOOT  = sysenreg7;
+
+/* combined output */
+MMU0 =  (!READ & EN_CTL & D24) & (RD_SYSEN & !DIAG)     # (RD_BERR & berrreg0) # (RD_CX & cxreg0) # (RD_ID & BIT0);
+MMU1  = (!READ & EN_CTL & D25) & (RD_SYSEN & sysenreg1)                        # (RD_CX & cxreg1) # (RD_ID & BIT1);
+MMU2  = (!READ & EN_CTL & D26) & (RD_SYSEN & sysenreg2)                        # (RD_CX & cxreg2) # (RD_ID & BIT2);
+MMU3  = (!READ & EN_CTL & D27) & (RD_SYSEN & sysenreg3)                        # (RD_CX & cxreg3) # (RD_ID & BIT3);
+MMU4  = (!READ & EN_CTL & D28) & (RD_SYSEN & sysenreg4)                        # (RD_CX & cxreg4) # (RD_ID & BIT4);
+MMU5  = (!READ & EN_CTL & D29) & (RD_SYSEN & sysenreg5) # (RD_BERR & berrreg1) # (RD_CX & cxreg5) # (RD_ID & BIT5);;
+MMU6  = (!READ & EN_CTL & D30) & (RD_SYSEN & sysenreg6) # (RD_BERR & berrreg2)                    # (RD_ID & BIT6);
+MMU7  = (!READ & EN_CTL & D31) & (RD_SYSEN & sysenreg7) # (RD_BERR & berrreg3)                    # (RD_ID & BIT7);
+
+/* combined OE */
+mmuoe_enable = (!READ & EN_CTL) # RD_SYSEN # RD_BERR # RD_CX # RD_ID;
+/* MMU[4.7]: RD_CX doesn't actually drive them in U210, might as well ? */
+MMU0.oe = mmuoe_enable;
+MMU1.oe = mmuoe_enable;
+MMU2.oe = mmuoe_enable;
+MMU3.oe = mmuoe_enable;
+MMU4.oe = mmuoe_enable;
+MMU5.oe = mmuoe_enable;
+MMU6.oe = mmuoe_enable;
+MMU7.oe = mmuoe_enable;
+
+/* U212 */
+D24.oe  = READ & EN_CTL;
+D25.oe  = READ & EN_CTL;
+D26.oe  = READ & EN_CTL;
+D27.oe  = READ & EN_CTL;
+D28.oe  = READ & EN_CTL;
+D29.oe  = READ & EN_CTL;
+D30.oe  = READ & EN_CTL;
+D31.oe  = READ & EN_CTL;
+
+D24 = MMU0;
+D25 = MMU1;
+D26 = MMU2;
+D27 = MMU3;
+D28 = MMU4;
+D29 = MMU5;
+D30 = MMU6;
+D31 = MMU7;
+
+/* IDPROM */
+BIT0 = (!A0 & !A1 & !A2 & !A3 & !A4) # ( A0 & !A1 & !A2 & !A3 & !A4) # ( A0 & !A1 &  A2 & !A3 & !A4) #
+       ( A0 &  A1 &  A2 & !A3 & !A4) # (!A0 & !A1 & !A2 &  A3 & !A4) # (!A0 &  A1 & !A2 &  A3 & !A4) #
+       (!A0 & !A1 &  A2 &  A3 & !A4) # (!A0 &  A1 &  A2 &  A3 & !A4) # ( A0 &  A1 &  A2 &  A3 & !A4);
+BIT1 = (!A0 &  A1 &  A2 & !A3 & !A4) # ( A0 &  A1 &  A2 & !A3 & !A4) # (!A0 & !A1 & !A2 &  A3 & !A4) #
+       ( A0 &  A1 & !A2 &  A3 & !A4) # (!A0 &  A1 &  A2 &  A3 & !A4) # ( A0 &  A1 &  A2 &  A3 & !A4);
+BIT2 = ( A0 & !A1 & !A2 &  A3 & !A4) # ( A0 &  A1 & !A2 &  A3 & !A4);
+BIT3 = (!A0 &  A1 & !A2 & !A3 & !A4) # ( A0 &  A1 & !A2 &  A3 & !A4) # (!A0 &  A1 &  A2 &  A3 & !A4);
+BIT4 = ( A0 & !A1 & !A2 & !A3 & !A4) # ( A0 & !A1 &  A2 & !A3 & !A4) # ( A0 &  A1 &  A2 & !A3 & !A4) #
+       ( A0 & !A1 & !A2 &  A3 & !A4) # (!A0 &  A1 & !A2 &  A3 & !A4) # ( A0 & !A1 &  A2 &  A3 & !A4) #
+       (!A0 &  A1 &  A2 &  A3 & !A4) # ( A0 &  A1 &  A2 &  A3 & !A4);
+BIT5 = (!A0 & !A1 &  A2 & !A3 & !A4) # (!A0 &  A1 &  A2 & !A3 & !A4) # ( A0 &  A1 &  A2 & !A3 & !A4) #
+       (!A0 & !A1 & !A2 &  A3 & !A4) # ( A0 & !A1 &  A2 &  A3 & !A4) # ( A0 &  A1 &  A2 &  A3 & !A4);
+BIT6 = ( A0 &  A1 & !A2 &  A3 & !A4) # ( A0 & !A1 &  A2 &  A3 & !A4) # (!A0 &  A1 &  A2 &  A3 & !A4) #
+       ( A0 &  A1 &  A2 &  A3 & !A4);
+BIT7 = (!A0 &  A1 & !A2 &  A3 & !A4) # ( A0 &  A1 & !A2 &  A3 & !A4) # (!A0 &  A1 &  A2 &  A3 & !A4) #
+       ( A0 &  A1 &  A2 &  A3 & !A4);

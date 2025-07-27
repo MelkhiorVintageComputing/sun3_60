@@ -1,0 +1,343 @@
+Name        sun3_60_MAPBUF ;
+PartNo      00 ;
+Date        2025-06-xx ;
+Revision    01 ;
+Designer    RomainDolbeau ;
+Company     none ;
+Assembly    Sun 3/60 ;
+Location    Uxxx ;
+Device      F1504ISPTQFP100;
+
+/* 
+   This consolidates U215, U217, U218 and U213 into a single CPLD
+   to handle MMU read/write control.
+   In addition, it could also implement the missing 3 bits of PMAP
+   that aren't on the 3/60 but are in the specifications.
+   This only requires computing EN_PMAP1 (and add the necessary storage!)
+*/
+
+/* Enable JTAG interface with internal 10K pullups on TDI and TMS */
+PROPERTY ATMEL { JTAG = ON } ;
+PROPERTY ATMEL { TDI_PULLUP = ON } ;
+PROPERTY ATMEL { TMS_PULLUP = ON } ;
+
+/* Consider pin assignments to be immutable; don't try to rearrange the design
+if it does not fit with the given pin assignments */
+/*
+PROPERTY ATMEL { PREASSIGN = KEEP } ;
+*/
+
+/*
+Pin#     Function
+     1     NC
+     2     NC
+     3     VCC
+     4     IO/TDI
+     5     NC
+     6     IO
+     7     NC
+     8     IO
+     9     IO
+    10     IO
+    11     GND
+    12     IO/PD
+    13     IO
+    14     IO
+    15     IO/TMS
+    16     IO
+    17     IO
+    18     VCC
+    19     IO
+    20     IO
+    21     IO
+    22     NC
+    23     IO
+    24     NC
+    25     IO
+    26     GND
+    27     NC
+    28     NC
+    29     IO
+    30     IO
+    31     IO
+    32     IO
+    33     IO
+    34     VCC
+    35     IO
+    36     IO
+    37     IO
+    38     GND
+    39     VCC
+    40     IO
+    41     IO
+    42     IO/PD
+    43     GND
+    44     IO
+    45     IO
+    46     IO
+    47     IO
+    48     IO
+    49     NC
+    50     NC
+    51     VCC
+    52     IO
+    53     NC
+    54     IO
+    55     NC
+    56     IO
+    57     IO
+    58     IO
+    59     GND
+    60     IO
+    61     IO
+    62     IO/TCK
+    63     IO
+    64     IO
+    65     IO
+    66     VCC
+    67     IO
+    68     IO
+    69     IO
+    70     NC
+    71     IO
+    72     NC
+    73     IO/TDO
+    74     GND
+    75     IO
+    76     IO
+    77     NC
+    78     NC
+    79     IO
+    80     IO
+    81     IO
+    82     VCC
+    83     IO
+    84     IO
+    85     IO/CLK
+    86     GND
+    87     IN/CLK
+    88     IN/OE
+    89     IN/CLR
+    90     IN/CLK/OE
+    91     VCC
+    92     IO
+    93     IO
+    94     IO
+    95     GND
+    96     IO
+    97     IO
+    98     IO
+    99     IO
+   100     IO
+*/
+
+PIN 19 = !EN_PMAP0;
+/* PIN 20 = !EN_PMAP1; */
+PIN 21 = !EN_PMAP2;
+PIN 23 = !EN_PMAP3;
+PIN 25 = !EN_SMAP;
+
+/* INOUTS */
+/* common */
+PIN 6  = MMU0;
+PIN 8  = MMU1;
+PIN 9  = MMU2;
+PIN 10 = MMU3;
+PIN 13 = MMU4;
+PIN 14 = MMU5;
+PIN 16 = MMU6;
+PIN 17 = MMU7;
+/* REMOVEME */
+PIN 19 = A0;
+PIN 20 = A1;
+PIN 21 = A2;
+PIN 23 = A3;
+PIN 25 = A4;
+PIN 29 = RD_ID;
+/*
+PIN 30 = ;*/
+
+PIN 31 = PA13;
+PIN 32 = PA14;
+PIN 33 = PA15;
+PIN 35 = PA16;
+PIN 36 = PA17;
+PIN 37 = PA18;
+PIN 40 = PA19;
+PIN 41 = PA20;
+PIN 44 = PA21;
+PIN 45 = PA22;
+PIN 46 = PA23;
+PIN 47 = PA24;
+PIN 48 = PA25;
+PIN 52 = PA26;
+PIN 54 = PA27;
+PIN 56 = PA28;
+
+PIN 57 = SA17;
+PIN 58 = SA18;
+PIN 60 = SA19;
+PIN 61 = SA20;
+PIN 63 = SA21;
+PIN 64 = SA22;
+PIN 65 = SA23;
+PIN 67 = SA24;
+PIN 68 = SA25; /* !!! */
+PIN 69 = SA26;
+PIN 71 = SA27;
+PIN 75 = SA28;
+PIN 76 = SA29;
+PIN 79 = SA30;
+PIN 80 = SA31;
+
+/* INPUTS */
+
+PIN 81 = !EN_SMAP1;
+/*
+PIN 83 = ;
+PIN 84 = ;
+*/
+PIN 88 = !READ; /* IN_OE */
+/* INOUTS */
+PIN 92 =  MODIFYX;
+PIN 93 =  ACCESSX;
+PIN 94 =  TYPE0X;
+PIN 96 =  TYPE1X;
+PIN 97 =  MMU_X;
+PIN 98 =  MMU_S;
+PIN 99 =  MMU_W;
+PIN 100 = MMU_V;
+
+/* Note that XXX and YYY are active-low signals but we do NOT declare them
+inverted here, as the ATF1502 fitter seems to ignore output enables on pins that
+are declared inverted */
+
+/* Signals that are IN from one PAL and OUT from another have been kept separate, so will need a loopback on the PCB.
+   In theory this is not needed (you can reuse the output signal directly as an internal input), but using a bypass would probably change the timings more than just moving from GAL to CPLD... */
+
+/*
+RESERVED
+PIN 4   = TDI ;
+PIN 15  = TMS ;
+PIN 62  = TCK ;
+PIN 73  = TDO ;
+*/
+
+/* EN_PMAP* / EN_SMAP* propagate from the MMU bus to memory when writing,
+   and from the memory to the MMU bus when reading.
+*/
+/* also # EN_PMAP1 in second term if implemented */
+MMU0.oe =  (READ & (EN_PMAP0 # EN_PMAP2 # EN_PMAP3 # EN_SMAP # EN_SMAP1 # RD_ID));
+MMU1.oe =  (READ & (EN_PMAP0 # EN_PMAP2 # EN_PMAP3 # EN_SMAP # EN_SMAP1 # RD_ID));
+MMU2.oe =  (READ & (EN_PMAP0 # EN_PMAP2 # EN_PMAP3 # EN_SMAP # EN_SMAP1 # RD_ID));
+MMU3.oe =  (READ & (EN_PMAP0 # EN_PMAP2 # EN_PMAP3 # EN_SMAP # EN_SMAP1 # RD_ID));
+MMU4.oe =  (READ & (EN_PMAP0 # EN_PMAP2 # EN_PMAP3 # EN_SMAP # EN_SMAP1 # RD_ID));
+MMU5.oe =  (READ & (EN_PMAP0 # EN_PMAP2 # EN_PMAP3 # EN_SMAP # EN_SMAP1 # RD_ID));
+MMU6.oe =  (READ & (EN_PMAP0 # EN_PMAP2 # EN_PMAP3 # EN_SMAP # EN_SMAP1 # RD_ID));
+MMU7.oe =  (READ & (EN_PMAP0 # EN_PMAP2 # EN_PMAP3 # EN_SMAP # EN_SMAP1 # RD_ID));
+
+MODIFYX.oe = !READ & EN_PMAP0;
+ACCESSX.oe = !READ & EN_PMAP0;
+TYPE0X.oe =  !READ & EN_PMAP0;
+TYPE1X.oe =  !READ & EN_PMAP0;
+MMU_X.oe =   !READ & EN_PMAP0;
+MMU_S.oe =   !READ & EN_PMAP0;
+MMU_W.oe =   !READ & EN_PMAP0;
+MMU_V.oe =   !READ & EN_PMAP0;
+
+/* PA29, PA30, PA31 controlled by EN_PMAP1 */
+
+PA21.oe =    !READ & EN_PMAP2;
+PA22.oe =    !READ & EN_PMAP2;
+PA23.oe =    !READ & EN_PMAP2;
+PA24.oe =    !READ & EN_PMAP2;
+PA25.oe =    !READ & EN_PMAP2;
+PA26.oe =    !READ & EN_PMAP2;
+PA27.oe =    !READ & EN_PMAP2;
+PA28.oe =    !READ & EN_PMAP2;
+
+/* PA29, PA30, PA31 controlled by EN_PMAP1 */
+
+PA13.oe =    !READ & EN_PMAP3;
+PA14.oe =    !READ & EN_PMAP3;
+PA15.oe =    !READ & EN_PMAP3;
+PA16.oe =    !READ & EN_PMAP3;
+PA17.oe =    !READ & EN_PMAP3;
+PA18.oe =    !READ & EN_PMAP3;
+PA19.oe =    !READ & EN_PMAP3;
+PA20.oe =    !READ & EN_PMAP3;
+
+SA17.oe =    !READ & EN_SMAP;
+SA18.oe =    !READ & EN_SMAP;
+SA19.oe =    !READ & EN_SMAP;
+SA20.oe =    !READ & EN_SMAP;
+SA21.oe =    !READ & EN_SMAP;
+SA22.oe =    !READ & EN_SMAP;
+SA23.oe =    !READ & EN_SMAP;
+SA24.oe =    !READ & EN_SMAP;
+
+SA25.oe =    !READ & EN_SMAP1;
+SA26.oe =    !READ & EN_SMAP1;
+SA27.oe =    !READ & EN_SMAP1;
+SA28.oe =    !READ & EN_SMAP1;
+SA29.oe =    !READ & EN_SMAP1;
+SA30.oe =    !READ & EN_SMAP1;
+SA31.oe =    !READ & EN_SMAP1;
+
+/* PA29, PA30, PA31 & EN_PMAP1 also in MMU0..2 (from the 3/160, others read as 0) */
+MMU0  = (EN_PMAP0 & MODIFYX) # (EN_PMAP2 & PA21) # (EN_PMAP3 & PA13) # (EN_SMAP & SA17)                     # (RD_ID & BIT0);
+MMU1  = (EN_PMAP0 & ACCESSX) # (EN_PMAP2 & PA22) # (EN_PMAP3 & PA14) # (EN_SMAP & SA18) # (EN_SMAP1 & SA25) # (RD_ID & BIT1);
+MMU2  = (EN_PMAP0 & TYPE0X ) # (EN_PMAP2 & PA23) # (EN_PMAP3 & PA15) # (EN_SMAP & SA19) # (EN_SMAP1 & SA26) # (RD_ID & BIT2);
+MMU3  = (EN_PMAP0 & TYPE1X ) # (EN_PMAP2 & PA24) # (EN_PMAP3 & PA16) # (EN_SMAP & SA20) # (EN_SMAP1 & SA27) # (RD_ID & BIT3);
+MMU4  = (EN_PMAP0 & MMU_X  ) # (EN_PMAP2 & PA25) # (EN_PMAP3 & PA17) # (EN_SMAP & SA21) # (EN_SMAP1 & SA28) # (RD_ID & BIT4);
+MMU5  = (EN_PMAP0 & MMU_S  ) # (EN_PMAP2 & PA26) # (EN_PMAP3 & PA18) # (EN_SMAP & SA22) # (EN_SMAP1 & SA29) # (RD_ID & BIT5);
+MMU6  = (EN_PMAP0 & MMU_W  ) # (EN_PMAP2 & PA27) # (EN_PMAP3 & PA19) # (EN_SMAP & SA23) # (EN_SMAP1 & SA30) # (RD_ID & BIT6);
+MMU7  = (EN_PMAP0 & MMU_V  ) # (EN_PMAP2 & PA28) # (EN_PMAP3 & PA20) # (EN_SMAP & SA24) # (EN_SMAP1 & SA31) # (RD_ID & BIT7);
+
+MODIFYX = MMU0;
+ACCESSX = MMU1;
+TYPE0X =  MMU2;
+TYPE1X =  MMU3;
+MMU_X =   MMU4;
+MMU_S =   MMU5;
+MMU_W =   MMU6;
+MMU_V =   MMU7;
+
+/* PA[29..31] are MMU[0..2] */
+
+PA21 = MMU0;
+PA22 = MMU1;
+PA23 = MMU2;
+PA24 = MMU3;
+PA25 = MMU4;
+PA26 = MMU5;
+PA27 = MMU6;
+PA28 = MMU7;
+
+PA13 = MMU0;
+PA14 = MMU1;
+PA15 = MMU2;
+PA16 = MMU3;
+PA17 = MMU4;
+PA18 = MMU5;
+PA19 = MMU6;
+PA20 = MMU7;
+
+SA17 = MMU0;
+SA18 = MMU1;
+SA19 = MMU2;
+SA20 = MMU3;
+SA21 = MMU4;
+SA22 = MMU5;
+SA23 = MMU6;
+SA24 = MMU7;
+
+SA25 = MMU1;
+SA26 = MMU2;
+SA27 = MMU3;
+SA28 = MMU4;
+SA29 = MMU5;
+SA30 = MMU6;
+SA31 = MMU7;
+
+/* only 7 */
