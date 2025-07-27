@@ -246,7 +246,7 @@ berrreg0.ck = BERRCLK;
 berrreg1.ck = BERRCLK;
 berrreg2.ck = BERRCLK;
 berrreg3.ck = BERRCLK;
-/* store the register in positive logic, so don't invert in the output */
+/* store the register in positive logic, so don't invert in the output */ /* CHECKME */
 berrreg0.d = WDOG;
 berrreg1.d = BERR_T;
 berrreg2.d = BERR_P;

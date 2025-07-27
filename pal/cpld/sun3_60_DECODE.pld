@@ -10,8 +10,9 @@ Device      F1504ISPTQFP100;
 
 /* 
    This combines ...
-   U310, U311, U312
+   U310, U311, part of U312
    U114
+   U107
 */
 
 /* Enable JTAG interface with internal 10K pullups on TDI and TMS */
@@ -140,19 +141,20 @@ PIN 17 = !RD_SCC0;
 PIN 19 = !RD_RTC;;
 PIN 20 = !WR_RTC;
 PIN 21 = !RERUN;
-PIN 23 = !C_S21;
+PIN 23 = !C_S21; /* becomes internal ? */
 PIN 25 = !INIT;
+/* EN_IO becomes internal */
 PIN 29 = ;
-PIN 30 = !EN_IO;
-PIN 31 = ;
-PIN 32 = ;
+PIN 30 = ;
+PIN 31 = !WDOG;
+PIN 32 = !POR;
 /* !RD_PAR0,  !WR_PAR0, !RD_PAR4, !RD_PAR5, !RD_PAR6, !RD_PAR7, !WR_PAR4 */
-PIN 33 = ;
-PIN 35 = ;
-PIN 36 = ;
-PIN 37 = ;
-PIN 40 = ;
-PIN 41 = ;
+PIN 33 = !HALT;
+PIN 35 = f22;
+PIN 36 = f21;
+PIN 37 = f19;
+PIN 40 = f18;
+PIN 41 = f17;
 
 PIN 42 = ; /* */
 
@@ -296,7 +298,7 @@ internal3 = ((!WRITE &  PA19 & ~PA18) & (EN_IOL & ~PA17)); /* read */
 all the way to the parity stuff.
    It also requires us to have access to A0/A1/A2 in this CPLD
    Instead, we can simply expose internal2 and internal3 and
-   compute them nearer the destinatio
+   compute them nearer the destination, in the PARITY cpld
 /*
 WR_PAR0   = ((~A2 & ~A1 & ~A0) & (~internal2)); // internal2 active low
 WR_PAR4   = (( A2 & ~A1 & ~A0) & (~internal2)); // internal2 active low
@@ -331,3 +333,47 @@ C_S3bis = C_S3; /* bis will be positive logic */
 C_S5bis = C_S5;
 
 
+/* U107 */
+
+f23 = ~((~f23 & HALT & !POR) #
+        (C_S5 & !POR) #
+        (HALT & !POR));
+f23.oe = (~f23 & C_S5 & !POR); /* why? not eonnected on the PAL... */
+
+f22.ck = !CLK;
+f22.d  = ~(((~f22 & C_S5 & !POR) #
+            (~f22 & HALT & !POR)) ^ ((~f23 & C_S5 & !POR) #
+	    	    	   	     (~f23 & HALT & !POR)));
+f21.ck = !CLK;
+f21.d  = ~(((~f21 & C_S5 & !POR) #
+	    (~f21 & HALT & !POR)) ^ ((~f22 & ~f23 & C_S5 & !POR) #
+	    	       	      	     (~f22 & ~f23 & HALT & !POR)));
+
+C_S21.ck = !CLK;
+C_S21.d =(((C_S21 & C_S5 & !POR) #
+	   (C_S21 & HALT & !POR)) ^ ((~f21 & ~f22 & ~f23 & C_S5 & !POR) #
+				     (~f21 & ~f22 & ~f23 & HALT & !POR)));
+
+f19.ck = !CLK
+f19.d  = ~(((~f19 & C_S5 & !POR) #
+            (~f19 & HALT & !POR)) ^ ((~f21 & ~f22 & ~f23 & C_S21 & C_S5 & !POR) #
+				     (~f21 & ~f22 & ~f23 & C_S21 & HALT & !POR)));
+
+f18.ck = !CLK;
+f18    = ~(((~f18 & C_S5 & !POR) #
+	    (~f18 & HALT & !POR)) ^ ((~f21 & ~f22 & ~f23 & ~f19 & C_S21 & C_S5 & !POR) #
+				     (~f21 & ~f22 & ~f23 & ~f19 & C_S21 & HALT & !POR)));
+
+f17.ck = !CLK;
+f17.d  = ~(((~f17 & C_S5 & !POR) #
+            (~f17 & HALT & !POR)) ^ ((~f21 & ~f22 & ~f23 & ~f18 & ~f19 & C_S21 & C_S5 & !POR) #
+				     (~f21 & ~f22 & ~f23 & ~f18 & ~f19 & C_S21 & HALT & !POR)));
+
+BERR_T.ck = !CLK;
+BERR_T    = ((BERR_T & C_S5) # (~f21 & ~f22 & ~f23 & ~f17 & ~f18 & ~f19 & C_S21 & C_S5));
+
+INIT.ck = !CLK;
+INIT	  = ((INIT # POR) ^ (~f21 & ~f22 & ~f23 & f17 & ~f18 & ~f19 & C_S21 & HALT & !POR));
+
+WDOG.oe = (!POR & WDOG);
+WDOG	= (~f21 & ~f22 & ~f23 & f17 & ~f18 & ~f19 & C_S21 & HALT & !INIT & !POR);

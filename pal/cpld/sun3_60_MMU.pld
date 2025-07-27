@@ -254,7 +254,7 @@ PIN 73  = TDO ;
    1574-01 generates some of the status bits? And handles permissions
 */
 
-/* 1574-01 */
+/* 1574-01 U232 */
 WE_STAT	= (IN_WE_PMAP0 # (EN_DEV & !DISACC & C_S5 & !C_S7X));
 /* common enable signal for all 4 bits */
 mmu1574_oe = (EN_DEV & !DISACC & C_S5 & !C_S7X);

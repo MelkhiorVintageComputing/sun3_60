@@ -23363,7 +23363,7 @@
 		(uuid "71c4733e-15e6-45b9-9a00-66f05d07bf72")
 	)
 	(hierarchical_label "IOLOCK-"
-		(shape input)
+		(shape output)
 		(at 288.29 151.13 0)
 		(effects
 			(font
@@ -27700,9 +27700,9 @@
 		(at 105.41 167.64 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005f3e0915")
 		(property "Reference" "U107"
 			(at 105.41 162.179 0)
@@ -28208,7 +28208,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-8_W7.62mm"
+		(property "Footprint" "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 66.04 162.56 0)
 			(effects
 				(font
@@ -28235,7 +28235,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "TL7705AID"
 			(at 66.04 162.56 0)
 			(effects
 				(font
@@ -29698,9 +29698,9 @@
 		(at 121.92 166.37 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "7de1db8d-95bb-474b-a832-b160240dbff6")
 		(property "Reference" "X48"

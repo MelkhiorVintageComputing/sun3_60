@@ -1,0 +1,304 @@
+Name        sun3_60_PARITY_DVMA ;
+PartNo      00 ;
+Date        2025-06-xx ;
+Revision    01 ;
+Designer    RomainDolbeau ;
+Company     none ;
+Assembly    Sun 3/60 ;
+Location    Uxxx ;
+Device      F1504ISPTQFP100;
+
+/* 
+   This combines ...
+   U130, U131
+   U106 
+*/
+
+/* Enable JTAG interface with internal 10K pullups on TDI and TMS */
+PROPERTY ATMEL { JTAG = ON } ;
+PROPERTY ATMEL { TDI_PULLUP = ON } ;
+PROPERTY ATMEL { TMS_PULLUP = ON } ;
+
+/* Consider pin assignments to be immutable; don't try to rearrange the design
+if it does not fit with the given pin assignments */
+/*
+PROPERTY ATMEL { PREASSIGN = KEEP } ;
+*/
+
+/*
+Pin#     Function
+     1     NC
+     2     NC
+     3     VCC
+     4     IO/TDI
+     5     NC
+     6     IO
+     7     NC
+     8     IO
+     9     IO
+    10     IO
+    11     GND
+    12     IO/PD
+    13     IO
+    14     IO
+    15     IO/TMS
+    16     IO
+    17     IO
+    18     VCC
+    19     IO
+    20     IO
+    21     IO
+    22     NC
+    23     IO
+    24     NC
+    25     IO
+    26     GND
+    27     NC
+    28     NC
+    29     IO
+    30     IO
+    31     IO
+    32     IO
+    33     IO
+    34     VCC
+    35     IO
+    36     IO
+    37     IO
+    38     GND
+    39     VCC
+    40     IO
+    41     IO
+    42     IO/PD
+    43     GND
+    44     IO
+    45     IO
+    46     IO
+    47     IO
+    48     IO
+    49     NC
+    50     NC
+    51     VCC
+    52     IO
+    53     NC
+    54     IO
+    55     NC
+    56     IO
+    57     IO
+    58     IO
+    59     GND
+    60     IO
+    61     IO
+    62     IO/TCK
+    63     IO
+    64     IO
+    65     IO
+    66     VCC
+    67     IO
+    68     IO
+    69     IO
+    70     NC
+    71     IO
+    72     NC
+    73     IO/TDO
+    74     GND
+    75     IO
+    76     IO
+    77     NC
+    78     NC
+    79     IO
+    80     IO
+    81     IO
+    82     VCC
+    83     IO
+    84     IO
+    85     IO/CLK
+    86     GND
+    87     IN/CLK
+    88     IN/OE
+    89     IN/CLR
+    90     IN/CLK/OE
+    91     VCC
+    92     IO
+    93     IO
+    94     IO
+    95     GND
+    96     IO
+    97     IO
+    98     IO
+    99     IO
+   100     IO
+*/
+
+PIN 6 = ;
+PIN 8 = ;
+PIN 9 = ;
+PIN 10 = ;
+PIN 13 = ;
+PIN 14 = ;
+PIN 16 = ;
+PIN 17 = ;
+PIN 19 = ;
+PIN 20 = ;
+PIN 21 = ;
+PIN 23 = ;
+PIN 25 = ;
+PIN 29 = ;
+PIN 30 = ;
+PIN 31 = ;
+PIN 32 = ;
+PIN 33 = ;
+PIN 35 = ;
+PIN 36 = ;
+PIN 37 = ;
+PIN 40 = ;
+PIN 41 = ;
+PIN 44 = ;
+PIN 45 = ;
+PIN 46 = ;
+PIN 47 = ;
+PIN 48 = ;
+PIN 52 = ;
+PIN 54 = ;
+PIN 56 = ;
+PIN 57 = ;
+PIN 58 = ;
+PIN 60 = ;
+PIN 61 = ;
+PIN 63 = ;
+PIN 64 = ;
+PIN 65 = ;
+PIN 67 = ;
+PIN 68 = ;
+PIN 69 = ;
+PIN 71 = ;
+PIN 75 = ;
+PIN 76 = ;
+PIN 79 = ;
+PIN 80 = ;
+PIN 81 = ;
+PIN 83 = ;
+PIN 84 = ;
+PIN 87 = ; /* INPUT / GCLK1 */
+PIN 92 = ;
+PIN 93 = ;
+PIN 94 = ;
+PIN 96 = ;
+PIN 97 = ;
+PIN 98 = ;
+PIN 99 = ;
+PIN 100 = ;
+
+
+/* Note that XXX and YYY are active-low signals but we do NOT declare them
+inverted here, as the ATF1502 fitter seems to ignore output enables on pins that
+are declared inverted */
+
+
+/*
+RESERVED
+PIN 4   = TDI ;
+PIN 15  = TMS ;
+PIN 62  = TCK ;
+PIN 73  = TDO ;
+*/
+
+/* U130 */
+NODE [u130reg7..0];
+
+u130reg0.ck = !CLK;
+u130reg1.ck = !CLK;
+u130reg2.ck = !CLK;
+u130reg3.ck = !CLK;
+u130reg4.ck = !CLK;
+u130reg5.ck = !CLK;
+u130reg6.ck = !CLK;
+u130reg7.ck = !CLK;
+
+u130reg0.d = !R_REQ;
+u130reg1.d = !C_S5;
+u130reg2.d = !E_REQ;
+u130reg3.d = !AS;
+u130reg4.d = !S_REQ;
+u130reg5.d = !XACK5in;
+u130reg6.d = !DMA;
+u130reg7.d = !DXACK;
+
+R_REX = !u130reg0; /* becomes internal */
+C_S7X = !u130reg1;
+E_REX = !u130reg2; /* becomes internal */
+MUX   = !u130reg3;
+S_REX = !u130reg4;
+XACK  = !u130reg5;
+DMAX  = !u130reg6; /* becomes internal */
+XACK5 = !u130reg7; /* becomes internal */
+
+/* U131 */
+
+AS    = (DMAX & !INIT & !XACK) : 'bZ;
+AS.oe = DMAX;
+
+R_ACK.d	 = ((!INIT & !XACK & R_ACK) #
+ 	    (!AS & BG          &  R_REX         & !XACK & !XACK5 & !BACK                            & BR) #
+	    (                     R_REX         & !XACK & !XACK5 &  BACK & !E_ACK & !R_ACK & !S_ACK));
+R_ACK.ck = !CLK;
+
+E_ACK.d  = ((!INIT & !XACK & E_ACK) #
+	    (!AS & BG &  E_REX & !R_REX         & !XACK & !XACK5 & !BACK                            & BR) #
+	    (            E_REX & !R_REX         & !XACK & !XACK5 &  BACK & !E_ACK & !R_ACK & !S_ACK));
+E_ACK.ck = !CLK;
+	
+S_ACK.d  = ((!INIT & !XACK & S_ACK) #
+	    (!AS & BG & !E_REX & !R_REX & S_REX & !XACK & !XACK5 & !BACK                            & BR) #
+	    (           !E_REX & !R_REX & S_REX & !XACK & !XACK5 &  BACK & !E_ACK & !R_ACK & !S_ACK));
+S_ACK.ck = !CLK;
+	
+DMA.d    = ((!INIT & !XACK & DMA) #
+	    (!AS & BG          &  R_REX         & !XACK & !XACK5 & !BACK                             & BR) #
+	    (                     R_REX         & !XACK & !XACK5 &  BACK & !E_ACK & !R_ACK & !S_ACK) #
+	    (!AS & BG &  E_REX & !R_REX         & !XACK & !XACK5 & !BACK                             & BR) #
+	    (            E_REX & !R_REX         & !XACK & !XACK5 &  BACK & !E_ACK & !R_ACK & !S_ACK) #
+	    (!AS & BG & !E_REX & !R_REX & S_REX & !XACK & !XACK5 & !BACK                             & BR) #
+	    (           !E_REX & !R_REX & S_REX & !XACK & !XACK5 &  BACK & !E_ACK & !R_ACK & !S_ACK));
+DMA.ck = !CLK;
+	
+BR.d = ((!DDIS & !BACK & BR) #
+        (!DDIS & !BG & E_REX & !BACK) #
+	(!DDIS & !BG & R_REX & !BACK) #
+	(!DDIS & !BG & S_REX & !BACK));
+BR.ck = !CLK;
+	
+BACK.d = ((E_REX & BACK) #
+          (R_REX & BACK) #
+	  (S_REX & BACK) #
+	  (!XACK & BACK & DMA) #
+	  (!AS & BG & !XACK & !XACK5 & !BACK & BR));
+BACK.ck = !CLK;
+
+/* U106 */
+
+BERRCLK	= ~ (!C_S5 #
+             DMA #
+	     (!BERR_P & !BERR_T & !BERR_V));
+BERR	= (INIT #
+           (BERR_P & C_S5) #
+	   (BERR_T & C_S5) #
+	   (BERR_V & C_S5) #
+	   (C_S5 & EMULATE) #
+	   (C_S5 & HALT & RERUN));
+
+DSACK0n.oe = (BERR & DMA);
+DSACK0n	=   ~(C_S5 & DMA);
+
+/* f16 switched to positive logic */
+f16	= (INIT #
+           RERUN #
+	   (f16 & BERR));
+
+HATL.oe = f16;
+HALT	= 'b0;
+
+RESET.or = INIT;
+RESET	= 'b0;
+
+R_REQ	= (R_CLK # (!R_ACK & R_REQ));
+

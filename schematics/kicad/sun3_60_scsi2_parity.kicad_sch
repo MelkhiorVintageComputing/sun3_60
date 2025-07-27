@@ -9964,7 +9964,7 @@
 	)
 	(hierarchical_label "CAS-"
 		(shape input)
-		(at -107.95 220.98 270)
+		(at -130.81 187.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)

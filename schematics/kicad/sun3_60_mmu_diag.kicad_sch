@@ -26361,7 +26361,7 @@
 		(uuid "14c0eeea-3799-48ff-8e3e-6bdf328d40d2")
 	)
 	(hierarchical_label "BERR.P-"
-		(shape input)
+		(shape output)
 		(at 124.46 172.72 0)
 		(effects
 			(font
@@ -26724,7 +26724,7 @@
 		(uuid "557d443f-e457-42ca-a51b-94b511db1504")
 	)
 	(hierarchical_label "BERR.V-"
-		(shape input)
+		(shape output)
 		(at 124.46 154.94 0)
 		(effects
 			(font
@@ -27462,12 +27462,12 @@
 	)
 	(hierarchical_label "WDOG-"
 		(shape input)
-		(at -138.43 302.26 0)
+		(at -214.63 312.42 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "efba7c6f-1c2b-411f-ba67-b8490c2acaed")
 	)
