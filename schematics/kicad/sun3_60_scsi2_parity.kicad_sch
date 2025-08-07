@@ -4016,7 +4016,7 @@
 		)
 		(uuid "97057106-0b12-4c22-b07f-f16058ca940a")
 	)
-	(text "PARITY+DVMA"
+	(text "CPLD PARITY"
 		(exclude_from_sim no)
 		(at -134.874 113.03 0)
 		(effects

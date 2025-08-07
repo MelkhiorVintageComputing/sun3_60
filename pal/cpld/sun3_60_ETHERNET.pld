@@ -10,6 +10,7 @@ Device      F1504ISPTQFP100;
 
 /* 
    This combines ...
+   U519, U520, U518
 */
 
 /* Enable JTAG interface with internal 10K pullups on TDI and TMS */
