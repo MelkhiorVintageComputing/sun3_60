@@ -4602,6 +4602,173 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Oscillator:SiT8008xx-2x-xxS"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Y"
+				(at 4.064 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SiT8008xx-2x-xxS"
+				(at 12.446 6.858 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Oscillator:Oscillator_SMD_SiT_PQFN-4Pin_3.2x2.5mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.sitime.com/support/resource-library/datasheets/sit8008-datasheet"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "SiTime Low Power Mems programmable oscillator, 1MHz to 110MHz, PQFN-4, 3.2x2.5mm (with standby pin)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Mems oscillator"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*PQFN*3.2x2.5mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SiT8008xx-2x-xxS_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -0.762) (xy -1.016 -0.762) (xy -1.016 0.762) (xy -0.508 0.762) (xy -0.508 -0.762) (xy 0 -0.762)
+						(xy 0 0.762) (xy 0.508 0.762) (xy 0.508 -0.762) (xy 0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SiT8008xx-2x-xxS_1_1"
+				(pin input line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "~{ST}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "Vdd"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "PAL20L8_1"
 			(pin_names
 				(offset 1.016)
@@ -10269,6 +10436,12 @@
 		(uuid "d41cc433-60cb-487c-9815-e3e880dfc5d0")
 	)
 	(junction
+		(at 119.38 210.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dea25e07-c0c4-4ff6-99db-2a614cf30153")
+	)
+	(junction
 		(at 162.56 138.43)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -10311,6 +10484,10 @@
 	(no_connect
 		(at -40.64 342.9)
 		(uuid "415bc148-99ee-4297-b8b3-dc8a3cbf5cff")
+	)
+	(no_connect
+		(at 186.69 123.19)
+		(uuid "42a9fd5a-9f37-4d03-9773-589346e8838b")
 	)
 	(no_connect
 		(at -96.52 342.9)
@@ -10407,6 +10584,10 @@
 	(no_connect
 		(at 335.28 85.09)
 		(uuid "935df9c1-42f8-4d7e-bffb-cb5aec1c5ccb")
+	)
+	(no_connect
+		(at 124.46 223.52)
+		(uuid "948b9557-42ac-4fb1-8b5d-d88c1b750300")
 	)
 	(no_connect
 		(at -107.95 113.03)
@@ -11754,16 +11935,6 @@
 	)
 	(wire
 		(pts
-			(xy 163.83 123.19) (xy 162.56 123.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1c0fbc0e-6f7f-4df9-8a19-83a52666c498")
-	)
-	(wire
-		(pts
 			(xy 279.4 38.1) (xy 307.34 38.1)
 		)
 		(stroke
@@ -12361,6 +12532,16 @@
 			(type default)
 		)
 		(uuid "51ef51ed-6bf4-48bb-a658-24c425e6ac4e")
+	)
+	(wire
+		(pts
+			(xy 119.38 218.44) (xy 124.46 218.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "52115b04-4f38-4358-8f43-bc439d925dc8")
 	)
 	(bus
 		(pts
@@ -14284,6 +14465,16 @@
 	)
 	(wire
 		(pts
+			(xy 119.38 210.82) (xy 124.46 210.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e18860bd-adf7-4843-a806-420d54ba7d73")
+	)
+	(wire
+		(pts
 			(xy 64.77 114.3) (xy 63.5 114.3)
 		)
 		(stroke
@@ -14661,16 +14852,6 @@
 			(type default)
 		)
 		(uuid "ffbca501-aab1-4eda-b3ee-76412acf5853")
-	)
-	(wire
-		(pts
-			(xy 186.69 123.19) (xy 186.69 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ffd95f3b-8104-4c82-93c4-9211518efe0c")
 	)
 	(label "WR.EEPROM-"
 		(at -95.25 85.09 90)
@@ -15283,7 +15464,7 @@
 		(uuid "3ccf54f3-88a7-45c8-8395-2776955b438b")
 	)
 	(label "RSVD1"
-		(at -109.22 279.4 180)
+		(at -109.22 289.56 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15373,7 +15554,7 @@
 		(uuid "49808d1a-ddf8-4745-90c4-da2159a686dc")
 	)
 	(label "RSVD2"
-		(at -109.22 281.94 180)
+		(at -109.22 292.1 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15383,7 +15564,7 @@
 		(uuid "4a308faa-8989-4916-aba9-27c87c41ea4b")
 	)
 	(label "RSVD5"
-		(at -109.22 294.64 180)
+		(at -109.22 302.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15872,6 +16053,16 @@
 		)
 		(uuid "7bbe5c7e-12a7-4cc3-89e3-a94f451bd994")
 	)
+	(label "CMCLK_32768_RTC"
+		(at 163.83 123.19 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7c3820ba-e7e6-4327-86e5-ef0cd2333348")
+	)
 	(label "OE.EPROM-"
 		(at -54.61 191.77 270)
 		(effects
@@ -15963,7 +16154,7 @@
 		(uuid "88a2b42c-dfe4-47bd-9be8-b0d9790d4965")
 	)
 	(label "RSVD3"
-		(at -109.22 284.48 180)
+		(at -109.22 294.64 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16051,6 +16242,16 @@
 			(justify left bottom)
 		)
 		(uuid "8fd6ee62-1433-45bc-b10a-2d4f9500e11d")
+	)
+	(label "GND"
+		(at 119.38 218.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90460131-7ccd-4635-8af4-730fea738fbe")
 	)
 	(label "VCC"
 		(at -77.47 85.09 90)
@@ -16142,6 +16343,16 @@
 		)
 		(uuid "95394e74-e4df-4278-ab6d-f4ba6f4ec2d5")
 	)
+	(label "GND"
+		(at 132.08 231.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "956b304d-e789-4a84-ba61-ef0200de7231")
+	)
 	(label "IO.D6"
 		(at 187.96 113.03 0)
 		(effects
@@ -16171,6 +16382,16 @@
 			(justify left bottom)
 		)
 		(uuid "96d51ba5-64a5-47f2-9058-80e77b69ff80")
+	)
+	(label "CMCLK_32768_RTC"
+		(at 139.7 223.52 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "96f938e9-61d6-4411-bc75-ee3d634641d3")
 	)
 	(label "VCC"
 		(at 302.26 62.23 180)
@@ -17203,7 +17424,7 @@
 		(uuid "f3c68b50-0ca2-45bc-b62c-3cac871fdb9b")
 	)
 	(label "RSVD4"
-		(at -109.22 292.1 180)
+		(at -109.22 299.72 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18162,12 +18383,12 @@
 	)
 	(hierarchical_label "V.INT-"
 		(shape input)
-		(at -109.22 312.42 180)
+		(at -91.44 236.22 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "5c390cc9-0d01-4413-8558-1c83d36f8258")
 	)
@@ -18591,7 +18812,7 @@
 	)
 	(hierarchical_label "RESET-"
 		(shape input)
-		(at -91.44 236.22 90)
+		(at -93.98 236.22 90)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19772,7 +19993,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
 			(at 148.59 120.65 0)
 			(effects
 				(font
@@ -19799,7 +20020,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "RVT1A471M0607"
 			(at 148.59 120.65 0)
 			(effects
 				(font
@@ -19850,7 +20071,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Battery:Battery_Panasonic_CR2032-VS1N_Vertical_CircularHoles"
+		(property "Footprint" "Battery:BatteryHolder_MYOUNG_BS-07-A1BJ001_CR2032"
 			(at 127 121.666 90)
 			(effects
 				(font
@@ -19877,7 +20098,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "BS-07-A1BJ001"
 			(at 127 123.19 0)
 			(effects
 				(font
@@ -19926,7 +20147,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 140.97 128.27 0)
 			(effects
 				(font
@@ -19953,7 +20174,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402WGF4700TCE"
 			(at 140.97 128.27 90)
 			(effects
 				(font
@@ -19982,9 +20203,9 @@
 		(at 151.13 138.43 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005fcca768")
 		(property "Reference" "C300"
 			(at 151.13 132.0292 90)
@@ -20058,9 +20279,9 @@
 		(at 151.13 151.13 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005fcd9a7a")
 		(property "Reference" "U303"
 			(at 151.13 144.3228 0)
@@ -20134,9 +20355,9 @@
 		(at 127 146.05 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005fcda39e")
 		(property "Reference" "C301"
 			(at 129.921 144.8816 0)
@@ -20212,9 +20433,9 @@
 		(at 171.45 156.21 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00005fcf1220")
 		(property "Reference" "R300"
 			(at 171.45 151.003 90)
@@ -21377,6 +21598,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 124.46 214.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2364c64e-eafd-43d6-be12-24892e6184de")
+		(property "Reference" "X58"
+			(at 128.27 213.3599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10nF 0402"
+			(at 128.27 215.8999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 125.4252 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 124.46 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 124.46 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CL05B103KB5NNNC"
+			(at 124.46 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b6d8ac58-0941-4529-b4d1-d46fb9f4e0e1")
+		)
+		(pin "2"
+			(uuid "78d798db-5348-4bd9-82bc-8ddeac3d9979")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/00000000-0000-0000-0000-00005fa4b7bb"
+					(reference "X58")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at -101.6 342.9 0)
 		(unit 1)
@@ -22067,6 +22367,85 @@
 			(project "sun3_60"
 				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/00000000-0000-0000-0000-00005fa4b7bb"
 					(reference "C30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 119.38 214.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "34deac30-bfc2-4200-a2e8-d08bd10abe93")
+		(property "Reference" "X57"
+			(at 123.19 213.3599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF 0402"
+			(at 123.19 215.8999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 120.3452 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 119.38 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 119.38 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 119.38 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "309c370c-2799-45c8-8efd-549ab9c2e4a1")
+		)
+		(pin "2"
+			(uuid "1da49159-1c00-41b1-9e15-068a1a711940")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/00000000-0000-0000-0000-00005fa4b7bb"
+					(reference "X57")
 					(unit 1)
 				)
 			)
@@ -23148,6 +23527,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:VCC")
+		(at 119.38 210.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "651ac0cf-2393-4bad-99c4-600c07d7cc3c")
+		(property "Reference" "#PWR095"
+			(at 119.38 214.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 119.38 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 119.38 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 119.38 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 119.38 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b78057e9-47bc-4e74-8f3c-88861e05e070")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/00000000-0000-0000-0000-00005fa4b7bb"
+					(reference "#PWR095")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at -139.7 414.02 0)
 		(unit 1)
@@ -23314,6 +23758,89 @@
 			(project "sun3_60"
 				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/00000000-0000-0000-0000-00005fa4b7bb"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Oscillator:SiT8008xx-2x-xxS")
+		(at 132.08 223.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6f4affba-f42d-4a4f-b114-b4cf2b01b8f0")
+		(property "Reference" "Y1"
+			(at 147.32 217.0998 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SiT8008xx-2x-xxS"
+			(at 147.32 219.6398 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm"
+			(at 132.08 223.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.sitime.com/support/resource-library/datasheets/sit8008-datasheet"
+			(at 132.08 223.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "SiTime Low Power Mems programmable oscillator, 1MHz to 110MHz, PQFN-4, 3.2x2.5mm (with standby pin)"
+			(at 132.08 223.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "TFOM32768K4RHKCNT2T"
+			(at 132.08 223.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "363d7307-ff36-4e44-bc73-919327733b67")
+		)
+		(pin "2"
+			(uuid "80c86791-3a4f-4884-a569-996022a0eb7b")
+		)
+		(pin "4"
+			(uuid "5a70a3b6-f307-4082-bb6b-1440cd6b301d")
+		)
+		(pin "1"
+			(uuid "bb34a17e-395d-4d35-82a0-d743121d0895")
+		)
+		(instances
+			(project ""
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/00000000-0000-0000-0000-00005fa4b7bb"
+					(reference "Y1")
 					(unit 1)
 				)
 			)
@@ -23837,6 +24364,71 @@
 			(project "sun3_60"
 				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/00000000-0000-0000-0000-00005fa4b7bb"
 					(reference "#PWR052")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 132.08 215.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "87565005-c117-4961-8a2b-19cd21ec0077")
+		(property "Reference" "#PWR094"
+			(at 132.08 219.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 132.08 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 132.08 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 132.08 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 132.08 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "db1b239a-fad2-4e06-873f-58ba93e8ddbd")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/00000000-0000-0000-0000-00005fa4b7bb"
+					(reference "#PWR094")
 					(unit 1)
 				)
 			)

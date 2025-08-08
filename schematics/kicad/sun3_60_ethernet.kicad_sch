@@ -4593,6 +4593,178 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Oscillator:SG-5032CAN"
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Y"
+				(at -5.08 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "SG-5032CAN"
+				(at 1.27 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Oscillator:Oscillator_SMD_SeikoEpson_SG8002LB-4Pin_5.0x3.2mm"
+				(at 17.78 -8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://support.epson.biz/td/api/doc_check.php?dl=brief_SG5032CAN&lang=en"
+				(at -2.54 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "CMOS Clock Oscillator 1 to 75 MHz"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Crystal Clock Oscillator"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Oscillator*SMD*SeikoEpson*SG8002LB*5.0x3.2mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SG-5032CAN_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -0.762) (xy -1.016 -0.762) (xy -1.016 0.762) (xy -0.508 0.762) (xy -0.508 -0.762) (xy 0 -0.762)
+						(xy 0 0.762) (xy 0.508 0.762) (xy 0.508 -0.762) (xy 0.762 -0.762)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SG-5032CAN_1_1"
+				(pin input line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "~{ST}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "TG01-0506NRLTR:TG01-0506NRLTR"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -8775,12 +8947,20 @@
 		(uuid "605fba1c-4174-4eca-9839-8e8ceee0e878")
 	)
 	(no_connect
+		(at 33.02 251.46)
+		(uuid "64b1e5f7-8c45-46b5-9a8f-f6a7ddfb2fd1")
+	)
+	(no_connect
 		(at -49.53 222.25)
 		(uuid "6f92e6eb-67d8-47c8-afbd-204292825d7c")
 	)
 	(no_connect
 		(at 41.91 143.51)
 		(uuid "71799c96-6a27-4937-b600-8a9fac5e1123")
+	)
+	(no_connect
+		(at 95.25 193.04)
+		(uuid "7b4b8a34-ae50-462b-b58e-041ef2aa7a35")
 	)
 	(no_connect
 		(at 144.78 146.05)
@@ -11280,16 +11460,6 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 193.04) (xy 95.25 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4996a9fe-4535-47c1-b499-7f5dc0e419ae")
-	)
-	(wire
-		(pts
 			(xy 80.01 121.92) (xy 82.55 121.92)
 		)
 		(stroke
@@ -12880,6 +13050,16 @@
 	)
 	(wire
 		(pts
+			(xy 40.64 242.57) (xy 40.64 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ee68cca-c4b3-4450-b16f-83e0dd89cba5")
+	)
+	(wire
+		(pts
 			(xy 181.61 36.83) (xy 184.15 36.83)
 		)
 		(stroke
@@ -13190,16 +13370,6 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 190.5) (xy 95.25 190.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b3e42a87-a476-4d3d-973e-1e81fc8f86b0")
-	)
-	(wire
-		(pts
 			(xy 219.71 55.88) (xy 227.33 55.88)
 		)
 		(stroke
@@ -13267,6 +13437,16 @@
 			(type default)
 		)
 		(uuid "b5db60b7-2a8d-4f39-b6e0-4f49088eaa3b")
+	)
+	(wire
+		(pts
+			(xy 27.94 245.11) (xy 33.02 245.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b63a7e0a-72c5-46f0-b7fd-03201238baf6")
 	)
 	(wire
 		(pts
@@ -14480,6 +14660,16 @@
 	)
 	(wire
 		(pts
+			(xy 27.94 237.49) (xy 33.02 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f805230f-2fec-4fbb-b0ea-16861a4f3bd2")
+	)
+	(wire
+		(pts
 			(xy 156.21 45.72) (xy 163.83 45.72)
 		)
 		(stroke
@@ -14808,6 +14998,16 @@
 		)
 		(uuid "0ee55901-f049-4b07-b34d-237cbc611a68")
 	)
+	(label "GND"
+		(at 40.64 259.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0f9bd4be-b95a-4b09-9beb-07c3a0a2bd9b")
+	)
 	(label "E.D3"
 		(at 43.18 76.2 0)
 		(effects
@@ -14897,6 +15097,16 @@
 			(justify left bottom)
 		)
 		(uuid "18569516-fd45-41a3-bc6b-933c2d072390")
+	)
+	(label "GND"
+		(at 27.94 245.11 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "19c98af8-4064-4eaa-b769-c38b94404b40")
 	)
 	(label "GND"
 		(at 68.58 64.77 180)
@@ -15098,6 +15308,16 @@
 		)
 		(uuid "2a9cd1cc-fb45-418b-8aee-cb701dcfda96")
 	)
+	(label "VCC"
+		(at 27.94 237.49 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2aaca58a-2142-4d23-8be2-c5720c29d219")
+	)
 	(label "D29"
 		(at 287.02 53.34 0)
 		(effects
@@ -15257,6 +15477,16 @@
 			(justify left bottom)
 		)
 		(uuid "391f76fc-7b14-46b5-bc80-c2b9577b7fd9")
+	)
+	(label "CLK_20MHZ_ETH"
+		(at 95.25 190.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3920f153-9b41-4738-9944-689df9b4d6c3")
 	)
 	(label "A0"
 		(at 92.71 43.18 0)
@@ -15597,6 +15827,16 @@
 			(justify left bottom)
 		)
 		(uuid "56be8222-296d-49bb-a855-9a7f84e3098d")
+	)
+	(label "VCC"
+		(at 40.64 243.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "56d8fc7f-b03a-49fc-88c7-279ac7ed83a7")
 	)
 	(label "VCC"
 		(at -39.37 163.83 0)
@@ -16807,6 +17047,16 @@
 			(justify right bottom)
 		)
 		(uuid "a63f2b1d-da05-431f-91da-4fb7953b10b2")
+	)
+	(label "CLK_20MHZ_ETH"
+		(at 48.26 251.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a64d9841-1803-4766-a717-dcd2bc837b57")
 	)
 	(label "VCC"
 		(at -74.93 222.25 270)
@@ -18528,12 +18778,12 @@
 	)
 	(hierarchical_label "E.REQ-"
 		(shape output)
-		(at -92.71 115.57 90)
+		(at -85.09 222.25 270)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "afb5449e-f8b2-4616-bba0-5244eb556965")
 	)
@@ -19106,9 +19356,9 @@
 		(at 64.77 217.17 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "1beca294-5de5-4ce3-a9b5-b3025a831cce")
 		(property "Reference" "C500"
@@ -20453,6 +20703,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:VCC")
+		(at 40.64 242.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4a33c15f-d9c0-4422-8ebb-984f18401183")
+		(property "Reference" "#PWR093"
+			(at 40.64 246.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 40.64 237.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 40.64 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 40.64 242.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "54bcf7f6-5f7a-45a0-b6a7-7afddc89303f")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/4ddea228-6046-4162-aa7d-ddd42f69c802"
+					(reference "#PWR093")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Logic_Programmable:PAL16L8")
 		(at 382.27 96.52 0)
 		(unit 1)
@@ -21454,6 +21770,89 @@
 		)
 	)
 	(symbol
+		(lib_id "Oscillator:SG-5032CAN")
+		(at 40.64 251.46 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7b747d2c-97dd-4824-8e03-5d11c32c04d8")
+		(property "Reference" "U16"
+			(at 50.8 245.0398 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "20 MHz"
+			(at 50.8 247.5798 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Oscillator:Oscillator_SMD_SeikoEpson_SG8002LB-4Pin_5.0x3.2mm"
+			(at 58.42 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://support.epson.biz/td/api/doc_check.php?dl=brief_SG5032CAN&lang=en"
+			(at 38.1 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "CMOS Clock Oscillator 1 to 75 MHz"
+			(at 40.64 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "X1G0044710004"
+			(at 40.64 251.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "3570004f-50db-4851-a40b-97cf837f31fb")
+		)
+		(pin "3"
+			(uuid "8eaefcd1-d302-4cfa-b07b-3dd800e84d25")
+		)
+		(pin "1"
+			(uuid "26fae223-3018-4d7a-8869-811b2db20166")
+		)
+		(pin "4"
+			(uuid "81d39694-839c-4c10-b6c2-b5f18d8485cf")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/4ddea228-6046-4162-aa7d-ddd42f69c802"
+					(reference "U16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 143.51 208.28 0)
 		(unit 1)
@@ -21481,7 +21880,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.0mm_W2.0mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 144.4752 212.09 0)
 			(effects
 				(font
@@ -21508,7 +21907,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402B562K500NT"
 			(at 143.51 208.28 0)
 			(effects
 				(font
@@ -21951,7 +22350,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 169.926 198.374 90)
 			(effects
 				(font
@@ -21978,7 +22377,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402WGF3001TCE"
 			(at 168.91 198.12 0)
 			(effects
 				(font
@@ -22299,6 +22698,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 27.94 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a8d8d659-ee07-4a6d-b3d1-2af48eedacbd")
+		(property "Reference" "X55"
+			(at 31.75 240.0299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF 0402"
+			(at 31.75 242.5699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 28.9052 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 27.94 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 27.94 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 27.94 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b0779b35-ef97-44f2-b864-fed194825461")
+		)
+		(pin "2"
+			(uuid "6ac3516e-957f-4a58-bf21-c58da08c590d")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/4ddea228-6046-4162-aa7d-ddd42f69c802"
+					(reference "X55")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 182.88 198.12 0)
 		(unit 1)
@@ -22326,7 +22804,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 183.896 198.374 90)
 			(effects
 				(font
@@ -22353,7 +22831,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402WGF5100TCE"
 			(at 182.88 198.12 0)
 			(effects
 				(font
@@ -23269,9 +23747,9 @@
 		(at 48.26 213.36 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bfa593b0-7933-4d26-a8ec-96129a88318f")
 		(property "Reference" "C501"
@@ -23592,7 +24070,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L7.0mm_W2.0mm_P5.00mm"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 163.83 220.0148 0)
 			(effects
 				(font
@@ -23619,7 +24097,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402B681K500NT"
 			(at 160.02 220.98 0)
 			(effects
 				(font
@@ -23899,6 +24377,85 @@
 			(project ""
 				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/4ddea228-6046-4162-aa7d-ddd42f69c802"
 					(reference "U520")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 33.02 241.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "dcb408cd-6c51-4cf2-ac7b-8c5217b5aefc")
+		(property "Reference" "X56"
+			(at 36.83 240.0299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10nF 0402"
+			(at 36.83 242.5699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 33.9852 245.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 33.02 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 33.02 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CL05B103KB5NNNC"
+			(at 33.02 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a2a92474-27ae-41b6-a141-2f1c12c919af")
+		)
+		(pin "2"
+			(uuid "3e64c674-845f-4656-a5c2-25207a99bf9a")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/4ddea228-6046-4162-aa7d-ddd42f69c802"
+					(reference "X56")
 					(unit 1)
 				)
 			)
@@ -24766,9 +25323,9 @@
 		(at 59.69 199.39 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "fb5085de-dbc4-4c6e-b08f-1198e2834c68")
 		(property "Reference" "U502"

@@ -5536,6 +5536,16 @@
 	)
 	(wire
 		(pts
+			(xy 16.51 88.9) (xy 21.59 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80fa8b73-d944-49ed-9e18-5b8d4bb8e531")
+	)
+	(wire
+		(pts
 			(xy 53.34 44.45) (xy 59.69 44.45)
 		)
 		(stroke
@@ -6154,6 +6164,16 @@
 		)
 		(uuid "eec44b54-3ddf-4498-a19b-7d7705275303")
 	)
+	(wire
+		(pts
+			(xy 16.51 96.52) (xy 21.59 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f0784a83-bc1a-4a3e-aad7-df85b574cf94")
+	)
 	(bus
 		(pts
 			(xy 46.99 72.39) (xy 46.99 74.93)
@@ -6333,6 +6353,16 @@
 			(justify left bottom)
 		)
 		(uuid "1e6558e2-fafc-40d1-a286-3a49fc33eb38")
+	)
+	(label "VCC"
+		(at 16.51 88.9 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "202c769f-99cd-4cd2-b17b-727b2ce7b286")
 	)
 	(label "A2"
 		(at 55.88 74.93 180)
@@ -6733,6 +6763,16 @@
 			(justify left bottom)
 		)
 		(uuid "c4941074-35f3-47d6-a903-fd31210438cc")
+	)
+	(label "GND"
+		(at 16.51 96.52 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c6f2fe04-0e31-41b6-9ed2-854c47df9aa1")
 	)
 	(label "IO.D0"
 		(at 134.62 41.91 0)
@@ -7738,6 +7778,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 21.59 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2ed9ea9b-d33a-4223-aea4-d3d0c235b2c4")
+		(property "Reference" "X54"
+			(at 25.4 91.4399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10nF 0402"
+			(at 25.4 93.9799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 22.5552 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 21.59 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 21.59 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CL05B103KB5NNNC"
+			(at 21.59 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c260f527-1db2-4a61-bab1-fea319e743d9")
+		)
+		(pin "2"
+			(uuid "64e0257f-079e-4614-8c66-81f98262f2f8")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/054c9f34-4c69-4214-aead-9eddc8182f56"
+					(reference "X54")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_Pack04_SIP")
 		(at 201.93 129.54 90)
 		(unit 1)
@@ -8024,6 +8143,85 @@
 				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/054c9f34-4c69-4214-aead-9eddc8182f56"
 					(reference "U408")
 					(unit 5)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 16.51 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "76c5305d-5f76-4a01-b162-e9606831cc74")
+		(property "Reference" "X53"
+			(at 20.32 91.4399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF 0402"
+			(at 20.32 93.9799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 17.4752 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 16.51 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 16.51 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 16.51 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1f8c8dfa-e9be-4ff5-997a-52e5f3356677")
+		)
+		(pin "2"
+			(uuid "30db7d46-2ab2-45f1-b92b-05f28f95a560")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/054c9f34-4c69-4214-aead-9eddc8182f56"
+					(reference "X53")
+					(unit 1)
 				)
 			)
 		)
