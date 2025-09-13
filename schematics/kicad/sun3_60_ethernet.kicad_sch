@@ -18470,12 +18470,12 @@
 	)
 	(hierarchical_label "R{slash}W-"
 		(shape output)
-		(at -39.37 176.53 0)
+		(at -115.57 181.61 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "0c5a0ff2-22b4-4380-9741-97728b44c291")
 	)
@@ -18679,12 +18679,12 @@
 	)
 	(hierarchical_label "SIZ0"
 		(shape output)
-		(at -39.37 168.91 0)
+		(at -115.57 189.23 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "7342a622-2ae8-4414-a56a-20229a6508b6")
 	)
@@ -18712,12 +18712,12 @@
 	)
 	(hierarchical_label "EN.E-"
 		(shape input)
-		(at -115.57 153.67 180)
+		(at -39.37 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "978045d7-8a57-43d2-ab72-fecf8652909d")
 	)
@@ -18734,23 +18734,23 @@
 	)
 	(hierarchical_label "SIZ1"
 		(shape output)
-		(at -39.37 171.45 0)
+		(at -115.57 186.69 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "9aa7a794-f451-4806-b83d-d83dd21392a2")
 	)
 	(hierarchical_label "DSACK1-"
 		(shape output)
-		(at -39.37 179.07 0)
+		(at -115.57 179.07 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "9db81be7-3836-4b77-ab65-6d50e429af07")
 	)

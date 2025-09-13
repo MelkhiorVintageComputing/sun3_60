@@ -149,6 +149,130 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:R_Network09"
 			(pin_names
 				(offset 0)
@@ -4792,6 +4916,16 @@
 		)
 		(uuid "10eeb89f-bec7-4d63-aa5a-9e4761b8cf92")
 	)
+	(label "M.PDc-"
+		(at 194.31 157.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "13d25e12-3aa8-45b2-93cd-d69792ada683")
+	)
 	(label "PA26"
 		(at 149.86 130.81 180)
 		(effects
@@ -4932,6 +5066,16 @@
 		)
 		(uuid "45633044-e26b-4ec5-a57b-649886a51e68")
 	)
+	(label "GND"
+		(at 71.12 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4b5db4ec-f921-4c8f-a5fd-19aff8489033")
+	)
 	(label "M.S3-"
 		(at 151.13 113.03 180)
 		(effects
@@ -4962,6 +5106,16 @@
 		)
 		(uuid "57b38cde-ab30-41d4-8db4-53f3f63b0728")
 	)
+	(label "M.PDa-"
+		(at 78.74 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5effef43-c4af-407d-b590-6c3f516b7918")
+	)
 	(label "GND"
 		(at 179.07 102.87 180)
 		(effects
@@ -4971,6 +5125,16 @@
 			(justify right bottom)
 		)
 		(uuid "68f64b80-3451-4c8f-9a67-d9f566f70473")
+	)
+	(label "GND"
+		(at 186.69 157.48 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6f419bd9-7075-426e-8937-c40012a25546")
 	)
 	(label "M.S1-"
 		(at 151.13 107.95 180)
@@ -4992,7 +5156,7 @@
 		)
 		(uuid "75f38e1b-c963-4730-9909-a417e8a9d9c1")
 	)
-	(label "M.PD-"
+	(label "M.PDc-"
 		(at 196.85 133.35 180)
 		(effects
 			(font
@@ -5102,7 +5266,7 @@
 		)
 		(uuid "9eff6380-5f4e-44de-b437-aea703b85b70")
 	)
-	(label "M.PD-"
+	(label "M.PDb-"
 		(at 151.13 138.43 180)
 		(effects
 			(font
@@ -5142,7 +5306,17 @@
 		)
 		(uuid "a843790f-7e0c-415a-8654-f365dabd80ac")
 	)
-	(label "M.PD-"
+	(label "M.PDb-"
+		(at 156.21 156.21 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ae08648b-0c3d-44e8-a6c7-229b05ec4772")
+	)
+	(label "M.PDa-"
 		(at 95.25 111.76 180)
 		(effects
 			(font
@@ -5191,6 +5365,16 @@
 			(justify right bottom)
 		)
 		(uuid "d37725b3-7c19-4136-8917-d3d058322b93")
+	)
+	(label "GND"
+		(at 148.59 156.21 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d7939f3a-a4cc-4c83-a3f6-71baeb84b437")
 	)
 	(label "VCC"
 		(at 179.07 95.25 0)
@@ -6009,6 +6193,83 @@
 			(project "sun3_60"
 				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/1dee99d4-22f0-4f1a-86d3-2134beb952b4"
 					(reference "X110")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 152.4 156.21 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0e88308a-e0ba-4d7b-b3ba-8d45fcba1015")
+		(property "Reference" "R71"
+			(at 152.4 151.0495 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 152.4 153.4738 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 152.4 157.988 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 152.4 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 152.4 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "0402WGF4701TCE"
+			(at 152.4 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c2d5a5c3-7567-4f11-84de-b0e34079916d")
+		)
+		(pin "2"
+			(uuid "f9586481-5087-4df0-8452-f1ca99d3b6cc")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/1dee99d4-22f0-4f1a-86d3-2134beb952b4"
+					(reference "R71")
 					(unit 1)
 				)
 			)
@@ -7327,6 +7588,83 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 74.93 116.84 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6528f073-4c80-4bea-b9d5-700fb8f1dc71")
+		(property "Reference" "R70"
+			(at 74.93 111.6795 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 74.93 114.1038 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 74.93 118.618 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 74.93 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 74.93 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "0402WGF4701TCE"
+			(at 74.93 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "aab99304-51e6-4d67-b527-1b51e170b35c")
+		)
+		(pin "2"
+			(uuid "287ccebf-329e-4496-b690-dabd0ee3f271")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/1dee99d4-22f0-4f1a-86d3-2134beb952b4"
+					(reference "R70")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "custom:74F00")
 		(at 72.39 49.53 0)
 		(unit 4)
@@ -8250,6 +8588,83 @@
 				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/1dee99d4-22f0-4f1a-86d3-2134beb952b4"
 					(reference "U600")
 					(unit 3)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 190.5 157.48 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f5e1d37a-415f-4d56-a6aa-50448f330c36")
+		(property "Reference" "R72"
+			(at 190.5 152.3195 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 190.5 154.7438 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 190.5 159.258 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 190.5 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 190.5 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "0402WGF4701TCE"
+			(at 190.5 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "acedf99b-f5b0-4334-b5fc-ebec80168913")
+		)
+		(pin "2"
+			(uuid "44d56b93-131f-499c-8e46-676dbf3ba11d")
+		)
+		(instances
+			(project "sun3_60"
+				(path "/d6b5cf90-8df0-4384-868a-524abed7c432/1dee99d4-22f0-4f1a-86d3-2134beb952b4"
+					(reference "R72")
+					(unit 1)
 				)
 			)
 		)
